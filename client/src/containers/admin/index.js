@@ -3,8 +3,9 @@ import React from 'react';
 const Admin = () =>  (
   <div>
     <h1>
-      Admin area
+      Hello Admin area
     </h1>
-    via redux
   </div>
 );
+
+export default Admin;
