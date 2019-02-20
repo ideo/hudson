@@ -1,13 +1,13 @@
 import React from 'react';
-import { Route, Link } from 'react-router-dom';
+import { Route, NavLink } from 'react-router-dom';
 import Admin from '../admin';
 import Canvas from '../prompts/canvas';
 
 const App = () => (
   <div>
     <header>
-      <Link to="/admin">Admin</Link>
-      <Link to="/canvas">Admin</Link>
+      <NavLink to="/admin">Admin</NavLink>
+      <NavLink to="/canvas">Canvas</NavLink>
     </header>
 
     <main>

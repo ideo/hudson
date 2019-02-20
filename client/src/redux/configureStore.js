@@ -1,8 +1,25 @@
-import { createStore, applyMiddleware, compose } from 'redux';
-import { routerMiddleware } from 'connected-react-router';
+/* Third Party */
+import { 
+  createStore, 
+  applyMiddleware, 
+  compose, 
+  combineReducers 
+} from 'redux';
+import { 
+  connectRouter, 
+  routerMiddleware 
+} from 'connected-react-router'
 import thunk from 'redux-thunk';
-import { createBrowserHistory } from 'history'
-import createRootReducer from './modules';
+import { createLogger } from 'redux-logger';
+import { createBrowserHistory } from 'history';
+
+/* First Party */
+import promptCanvas from './modules/prompt-canvas';
+
+const createRootReducer = (history) => combineReducers({
+  router: connectRouter(history),
+  promptCanvas
+});
 
 export const history = createBrowserHistory();
 
@@ -14,7 +31,8 @@ const middleware = [
 ];
 
 if (process.env.NODE_ENV === 'development') {
-  const devToolsExtension = window.__REDUX_DEVTOOLS_EXTENSION__
+  const devToolsExtension = window.__REDUX_DEVTOOLS_EXTENSION__;
+  middleware.unshift(createLogger('IDEO Hudson'));
 
   if(typeof devToolsExtension === 'function') {
     enhancers.push(devToolsExtension());
