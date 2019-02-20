@@ -72,7 +72,10 @@ class Canvas extends Component {
       // Show confirmation message
       content = (
         <div className="confirmation-text">
-          {confirmationMessage}
+          <div dangerouslySetInnerHTML={{
+            __html: confirmationMessage
+          }}>
+          </div>
         </div>
       );
     } else if (asyncStatus === ASYNC_SETTLED && confirmationStatus === INVISIBLE) {
