@@ -16,16 +16,19 @@ const SUBMIT_PROMPT_CANVAS_FAIL = 'prompt:canvas:SUBMIT_PROMPT_CANVAS_FAIL';
 const SUBMIT_PROMPT_CANVAS_SUCCESS = 'prompt:canvas:SUBMIT_PROMPT_CANVAS_SUCCESS';
 const CLEAR_PROMPT_CANVAS = 'prompt:canvas:CLEAR_PROMPT_CANVAS';
 const DRAW_PROMPT_CANVAS = 'prompt:canvas:DRAW_PROMPT_CANVAS';
-const SUBMITTED_PROMPT_CANVAS = 'prompt:SUBMITTED_PROMPT_CANVAS';
 const SHOW_CONFIRMATION_VIEW = 'prompt:canvas:SHOW_CONFIRMATION_VIEW';
 const HIDE_CONFIRMATION_VIEW = 'prompt:canvas:HIDE_CONFIRMATION_VIEW';
+
+// TODO: this should come from the API
+const hideConfirmationViewDelayInMs = 2000; 
 
 /* Action Creators */
 export function submitPromptCanvas() {
   return (dispatch, getState) => {
-    dispatch(submitPrompCanvasStart);
+    dispatch(submitPrompCanvasStart());
     window.setTimeout(() => {
       dispatch(submitPromptCanvasSuccess());
+      dispatch(flashConfirmationView(hideConfirmationViewDelayInMs));
     }, 2000);
   };
 }
@@ -54,16 +57,25 @@ export function clearPromptCanvas() {
   };
 }
 
-export function showConfirmationView(hideDelay) {
-  return (dispatch) => {
-    
-  }
+export function showConfirmationView() {
+  return {
+    type: SHOW_CONFIRMATION_VIEW
+  };
 }
 
 export function hideConfirmationView() {
   return {
     type: HIDE_CONFIRMATION_VIEW
   };
+}
+
+export function flashConfirmationView(hideDelayInMs) {
+  return (dispatch) => {
+    dispatch(showConfirmationView());
+    window.setTimeout(() => {
+      dispatch(hideConfirmationView());
+    }, hideDelayInMs);
+  }
 }
 
 

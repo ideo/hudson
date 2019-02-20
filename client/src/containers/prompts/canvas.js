@@ -11,6 +11,8 @@ import {
   drawPromptCanvas,
   CLEARED,
   DIRTY,
+  VISIBLE,
+  INVISIBLE,
 } from '../../redux/modules/prompt-canvas';
 import { 
   ASYNC_PENDING,
@@ -27,7 +29,7 @@ const confirmationMessage = `
 class Canvas extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
-    const imageData = this.canvas.toDataURL('image/png');
+    // const imageData = this.canvas.toDataURL('image/png');
     
     this.props.submitPromptCanvas();
   
@@ -63,11 +65,17 @@ class Canvas extends Component {
 
   render() {
     const { width, height } = window;
-    const { canvasStatus, asyncStatus } = this.props;
+    const { asyncStatus, confirmationStatus } = this.props;
 
     let content;
-
-    if (asyncStatus === ASYNC_SETTLED && canvasStatus === CLEARED) {
+    if (asyncStatus === ASYNC_SETTLED && confirmationStatus === VISIBLE) {
+      // Show confirmation message
+      content = (
+        <div className="confirmation-text">
+          {confirmationMessage}
+        </div>
+      );
+    } else if (asyncStatus === ASYNC_SETTLED && confirmationStatus === INVISIBLE) {
       // Clean Canvas
       content = (
         <div className="canvas-container" id="canvas-container">
@@ -80,11 +88,9 @@ class Canvas extends Component {
               <button onClick={this.handleClear}>Clear</button>
               <button onClick={this.handleSubmit}>Submit</button>
           </div>
-      </div>  
+        </div>  
       );
-    }
-    
-    if (asyncStatus === ASYNC_PENDING && canvasStatus === DIRTY) {
+    } else if (asyncStatus === ASYNC_PENDING) {
       // Saving Canvas
       content = (
         <div>
@@ -92,22 +98,17 @@ class Canvas extends Component {
         </div>
       );
     }
-    
-    if (asyncStatus === ASYNC_SETTLED) {
-      content = (
-        <div className="confirmation-text">
-          {confirmationMessage}
-        </div>
-      );
-    }
-
     return content;
   }
 
 }
 
-const mapStateToProps = ({ promptCanvas: { status } }) => ({
-  status
+const mapStateToProps = ({ promptCanvas: { 
+  canvasStatus, asyncStatus, confirmationStatus
+} }) => ({
+  canvasStatus,
+  asyncStatus,
+  confirmationStatus
 });
 
 const mapDispatchToProps = dispatch =>
