@@ -16,3 +16,15 @@ code {
 .nav-active {
   color: blue;
 }
+
+#canvas, #temp-canvas {
+	position: absolute;
+	left: 0px; right: 0;
+	bottom: 0; top: 0;
+	cursor: crosshair;
+}
+
+.canvas-buttons {
+  position: relative;
+  z-index: 10;
+}

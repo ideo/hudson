@@ -5,6 +5,8 @@ import {
 
 /* Constants */
 export const CLEARED = 'CLEARED';
+export const IDLE = 'IDLE';
+export const DRAWING = 'DRAWING';
 export const DIRTY = 'DIRTY';
 export const SUBMITTED = 'SUBMITTED';
 export const VISIBLE = 'VISIBLE';
@@ -18,6 +20,13 @@ const CLEAR_PROMPT_CANVAS = 'prompt:canvas:CLEAR_PROMPT_CANVAS';
 const DRAW_PROMPT_CANVAS = 'prompt:canvas:DRAW_PROMPT_CANVAS';
 const SHOW_CONFIRMATION_VIEW = 'prompt:canvas:SHOW_CONFIRMATION_VIEW';
 const HIDE_CONFIRMATION_VIEW = 'prompt:canvas:HIDE_CONFIRMATION_VIEW';
+const SET_STATUS_DRAWING = 'prompt:canvas:SET_STATUS_DRAWING';
+const SET_STATUS_IDLE = 'prompt:canvas:SET_STATUS_IDLE';
+const UPDATE_PEN_POSITION = 'prompt:canvas:UPDATE_PEN_POSITION';
+const ADD_DRAWING_POINT = 'prompt:canvas:ADD_DRAWING_POINT';
+const CLEAR_DRAWING_POINTS = 'prompt:canvas:CLEAR_DRAWING_POINTS';
+const SET_DRAWING_COLOR = 'prompt:canvas:SET_DRAWING_COLOR';
+const SET_STROKE_WIDTH = 'prompt:canvas:SET_STROKE_WIDTH';
 
 // TODO: this should come from the API
 const hideConfirmationViewDelayInMs = 2000; 
@@ -30,6 +39,40 @@ export function submitPromptCanvas() {
       dispatch(submitPromptCanvasSuccess());
       dispatch(flashConfirmationView(hideConfirmationViewDelayInMs));
     }, 2000);
+  };
+}
+
+export function setDrawingColor(color) {
+  return {
+    type: SET_DRAWING_COLOR,
+    paylad: color
+  };
+}
+
+export function updatePenPosition(newPosition) {
+  return {
+    type: UPDATE_PEN_POSITION,
+    payload: newPosition
+  };
+}
+
+export function resetPenPosition() {
+  return {
+    type: UPDATE_PEN_POSITION,
+    paylad: {x: 0, y: 0}
+  };
+}
+
+export function addDrawingPoint(point) {
+  return {
+    type: ADD_DRAWING_POINT,
+    payload: point
+  };
+}
+
+export function clearDrawingPoints() {
+  return {
+    type: CLEAR_DRAWING_POINTS
   };
 }
 
@@ -69,12 +112,31 @@ export function hideConfirmationView() {
   };
 }
 
+export function setStatusDrawing() {
+  return {
+    type: SET_STATUS_DRAWING
+  };
+}
+
+export function setStatusIdle() {
+  return {
+    type: SET_STATUS_IDLE
+  }
+};
+
 export function flashConfirmationView(hideDelayInMs) {
   return (dispatch) => {
     dispatch(showConfirmationView());
     window.setTimeout(() => {
       dispatch(hideConfirmationView());
     }, hideDelayInMs);
+  }
+}
+
+export function setstrokeWidth(strokeWidth) {
+  return {
+    type: SET_STROKE_WIDTH,
+    payload: strokeWidth
   }
 }
 
@@ -88,7 +150,14 @@ export function drawPromptCanvas() {
 const initialState = {
   canvasStatus: CLEARED,
   asyncStatus: ASYNC_SETTLED,
-  confirmationStatus: INVISIBLE
+  confirmationStatus: INVISIBLE,
+  penPosition: {
+    x: 0,
+    y: 0
+  },
+  points: [],
+  strokeColor: '#000000',
+  strokeWidth: 10
 };
 
 /* Reducer */
@@ -129,6 +198,41 @@ export default function reducer(state = initialState, action = {}) {
           ...state,
           canvasStatus: DIRTY
         };
+      case SET_STATUS_DRAWING:
+        return {
+          ...state,
+          canvasStatus: DRAWING
+        };
+      case SET_STATUS_IDLE:
+        return {
+          ...state,
+          canvasStatus: IDLE
+        };
+      case UPDATE_PEN_POSITION:
+        return {
+          ...state,
+          penPosition: action.payload
+        };
+      case ADD_DRAWING_POINT:
+        return {
+          ...state,
+          points: [...state.points, action.payload]
+        };
+      case CLEAR_DRAWING_POINTS:
+        return {
+          ...state,
+          points: []
+        };
+      case SET_DRAWING_COLOR:
+        return {
+          ...state,
+          strokeColor: action.payload
+        };
+      case SET_STROKE_WIDTH:
+        return {
+          ...state,
+          strokeWidth: action.payload
+        }
       default: {
         return {
           ...state

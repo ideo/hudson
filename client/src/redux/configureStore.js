@@ -32,7 +32,7 @@ const middleware = [
 
 if (process.env.NODE_ENV === 'development') {
   const devToolsExtension = window.__REDUX_DEVTOOLS_EXTENSION__;
-  middleware.unshift(createLogger('IDEO Hudson'));
+  //middleware.unshift(createLogger('IDEO Hudson'));
 
   if(typeof devToolsExtension === 'function') {
     enhancers.push(devToolsExtension());
