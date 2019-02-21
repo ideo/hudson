@@ -61,7 +61,11 @@ class Canvas extends Component {
     const tempCanvas = document.getElementById('temp-canvas');
     const container = document.getElementById('canvas-container');
     container.removeChild(tempCanvas)
-    this.resetTempCanvas();
+    const foo = this.resetTempCanvas.bind(this);
+    window.setTimeout(()=> {
+      
+      foo()
+    }, 5000);
   }
 
   handleClear = (e) => {
@@ -168,8 +172,10 @@ class Canvas extends Component {
     this.tempCtx.lineCap = 'round';
     this.ctx = this.canvas.getContext('2d');
 
-    var container = document.getElementById('canvas-container');
-    container.appendChild(this.tempCanvas)
+    const container = document.getElementById('canvas-container');
+    console.log('container is: ', container, this.tempCanvas);
+    
+    container.insertBefore(this.canvas, this.tempCanvas);
   }
 
   render() {
