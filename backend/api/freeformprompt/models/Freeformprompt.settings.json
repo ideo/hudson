@@ -1,0 +1,41 @@
+{
+  "connection": "default",
+  "collectionName": "prompts",
+  "info": {
+    "name": "freeformprompt",
+    "description": "Freeform Prompt is a provocation we put in front of the users that asks them to draw or write freely. "
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "comment": ""
+  },
+  "attributes": {
+    "provocation": {
+      "default": "What's your favorite sandwich?",
+      "type": "text",
+      "required": true
+    },
+    "description": {
+      "default": "Any additional description we might need to add. This is not user facing.",
+      "type": "text"
+    },
+    "Thank you message timeout": {
+      "default": 5,
+      "type": "integer",
+      "required": true
+    },
+    "freeformentries": {
+      "collection": "freeformentry",
+      "via": "freeformprompt"
+    },
+    "Install site": {
+      "default": "",
+      "type": "text"
+    },
+    "campaign": {
+      "model": "campaign",
+      "via": "freeformprompts"
+    }
+  }
+}

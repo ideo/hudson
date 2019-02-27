@@ -1,0 +1,33 @@
+{
+  "connection": "default",
+  "collectionName": "freeformentries",
+  "info": {
+    "name": "freeformentry",
+    "description": "This is a response that user submits to freeform prompt."
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "comment": ""
+  },
+  "attributes": {
+    "geolocation": {
+      "default": "",
+      "type": "json"
+    },
+    "response": {
+      "model": "file",
+      "via": "related",
+      "plugin": "upload",
+      "required": true
+    },
+    "transcription": {
+      "default": "",
+      "type": "text"
+    },
+    "freeformprompt": {
+      "model": "freeformprompt",
+      "via": "freeformentries"
+    }
+  }
+}

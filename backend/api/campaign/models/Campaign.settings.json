@@ -1,0 +1,32 @@
+{
+  "connection": "default",
+  "collectionName": "campaigns",
+  "info": {
+    "name": "campaign",
+    "description": "Each project can have one or multiple campaigns deployed for different purposes."
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "comment": ""
+  },
+  "attributes": {
+    "name": {
+      "default": "",
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "default": "",
+      "type": "text"
+    },
+    "project": {
+      "model": "project",
+      "via": "campaigns"
+    },
+    "freeformprompts": {
+      "collection": "freeformprompt",
+      "via": "campaign"
+    }
+  }
+}

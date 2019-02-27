@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/freeformentries",
+      "handler": "Freeformentry.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/freeformentries/count",
+      "handler": "Freeformentry.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/freeformentries/:id",
+      "handler": "Freeformentry.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/freeformentries",
+      "handler": "Freeformentry.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/freeformentries/:id",
+      "handler": "Freeformentry.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/freeformentries/:id",
+      "handler": "Freeformentry.destroy",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

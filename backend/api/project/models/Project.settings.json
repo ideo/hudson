@@ -1,0 +1,29 @@
+{
+  "connection": "default",
+  "collectionName": "projects",
+  "info": {
+    "name": "project",
+    "description": "This is an IDEO project for which we deploy Hudson as a research tool."
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "comment": ""
+  },
+  "attributes": {
+    "Description": {
+      "default": "",
+      "type": "text",
+      "required": true
+    },
+    "Client": {
+      "default": "",
+      "type": "string",
+      "required": true
+    },
+    "campaigns": {
+      "collection": "campaign",
+      "via": "project"
+    }
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/freeformprompts",
+      "handler": "Freeformprompt.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/freeformprompts/count",
+      "handler": "Freeformprompt.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/freeformprompts/:id",
+      "handler": "Freeformprompt.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/freeformprompts",
+      "handler": "Freeformprompt.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/freeformprompts/:id",
+      "handler": "Freeformprompt.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/freeformprompts/:id",
+      "handler": "Freeformprompt.destroy",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}
