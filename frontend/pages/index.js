@@ -1,11 +1,15 @@
-import { Box, Heading, Button } from 'rebass'
-import { ThemeProvider } from 'styled-components'
-import theme from '../theme';
-
-export default props =>
-  <ThemeProvider theme={theme}>
-    <Box>
-      <Heading color='blue'>Hello</Heading>
-      <Button>Rebass</Button>
-    </Box>
-  </ThemeProvider>
+/* /pages/index.js */
+import { Button, Alert } from "reactstrap";
+import Layout from "../components/Layout";
+export default () => {
+  return (
+    <Layout>
+      <div>
+        <Alert color="primary">
+          Hello Project is strapi-next with Bootstrap
+        </Alert>
+        &nbsp; <Button color="primary">Hello from nextjs</Button>
+      </div>
+    </Layout>
+  );
+};
