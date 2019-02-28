@@ -6,9 +6,18 @@ class FreeformPrompt extends Component {
   static async getInitialProps({ query }) {
     // TODO: account for case without query ID
     const BASE_API_URL = 'http://localhost:1337/freeformprompts';
-    const { data } = await axios.get(`${BASE_API_URL}/${query.id}`);
+    let response = { data: '' };
+    let notFound = false;
+    try {
+      response = await axios.get(`${BASE_API_URL}/${query.id}`);
+    } catch(e) {
+      console.log('woops - something went wrong');
+      notFound = true;
+    }
+
     return {
-      data
+      data: response.data,
+      notFound
     };
   }
 
@@ -17,9 +26,11 @@ class FreeformPrompt extends Component {
   }
 
   render() {
+    const { notFound, data } = this.props
     return (
       <Layout>
-        { this.props.data.provocation }
+        { notFound && <h1>Woops. Prompt does not exist.</h1> }
+        { !notFound && data.provocation }
       </Layout>
     ); 
   }
