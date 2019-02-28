@@ -1,0 +1,72 @@
+#canvas, #temp-canvas {
+	position: absolute;
+	left: 0px; right: 0;
+	bottom: 0; top: 0;
+	cursor: crosshair;
+}
+
+@media screen and (max-width: 1024px) {
+  button {
+      font-size: 60px;
+      padding: 25px;
+  }
+
+  .transcription-submit {
+      width: 100%;
+      font-size: 20px;
+  }
+
+  .transcription-text {
+      width: 100%;
+  }
+}
+
+button {
+  padding: 10px;
+  border: none;
+  font-size: 60px;
+  border-radius: 4px;
+  background-color: white;
+  font-family: 'BureauGrotesk';
+  text-transform: uppercase; 
+
+  &:hover {
+      color: #9F2F91;
+  }
+
+  &:focus {
+      outline: 0;
+  }
+}
+
+.canvas-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: 100%;
+}
+
+.canvas-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  z-index: 2;
+  cursor: pointer;
+}
+
+.canvas-text {
+  font-size: 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: 80px;
+  height: 100%;
+  margin-top: 0px;
+  user-select: none;
+  p {
+      margin-bottom: 20px;
+      margin-top: 0px;
+  }
+}

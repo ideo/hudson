@@ -5,6 +5,7 @@ import Head from "next/head";
 
 import { Container } from "reactstrap";
 
+
 class Layout extends React.Component {
   constructor(props) {
     super(props);
@@ -32,7 +33,7 @@ class Layout extends React.Component {
         </Head>
         <header>
         </header>
-        <Container>{children}</Container>
+        <Container fluid={true}>{children}</Container>
       </div>
     );
   }
