@@ -53,27 +53,28 @@ class FreeformPrompt extends Component {
     const { id: promptId  } = this.props.data
     console.log('----> id is: ', promptId)
     
-    // this.setState({ hasSubmitted: true })
-    // var tempCanvas = document.getElementById("temp-canvas")
-    // var container = document.getElementById('canvas-container')
-    // container.removeChild(tempCanvas)
+    this.setState({ hasSubmitted: true })
+    var tempCanvas = document.getElementById("temp-canvas")
+    var container = document.getElementById('canvas-container')
+    container.removeChild(tempCanvas)
 
-    // axios
-    //   .post(`http://localhost:1337/freeformentries`, {
-    //     geolocation: JSON.stringify({lat: 2222, lon: 2233 }),
-    //     freeformprompt: promptId
-    //   })
-    //   .then(response => {
-    //     // Handle success.
-    //     console.log(
-    //       'Well done, your post has been successfully created: ',
-    //       response.data
-    //     );
-    //   })
-    //   .catch(error => {
-    //     // Handle error.
-    //     console.log('An error occurred:', error);
-    //   });
+    axios
+      .post(`http://localhost:1337/freeformentries`, {
+        geolocation: JSON.stringify({lat: 2222, lon: 2233 }),
+        freeformprompt: promptId,
+        response: imageData
+      })
+      .then(response => {
+        // Handle success.
+        console.log(
+          'Well done, your post has been successfully created: ',
+          response.data
+        );
+      })
+      .catch(error => {
+        // Handle error.
+        console.log('An error occurred:', error);
+      });
 
     // $.post('/note', { imageData: imageData }, (data) => {
     //   console.log('success')
