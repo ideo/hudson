@@ -4,6 +4,13 @@ import Layout from '../components/Layout'
 import React, { Component } from 'react';
 import axios from 'axios';
 import '../style.scss';
+import getConfig from 'next/config';
+
+const { publicRuntimeConfig } = getConfig();
+const { BASE_API_URL } = publicRuntimeConfig;
+const PROMPTS_API_URL = `${BASE_API_URL}/freeformprompts`;
+const ENTRIES_API_URL = `${BASE_API_URL}/freeformentries`;
+const UPLOAD_API_URL = `${BASE_API_URL}/upload`;
 
 class FreeformPrompt extends Component {
   state = {
@@ -15,13 +22,10 @@ class FreeformPrompt extends Component {
 
   static async getInitialProps({ query }) {
     // TODO: account for case without query ID
-    const BASE_API_URL = 'http://localhost:1337/freeformprompts';
     let response = { data: '' };
     let notFound = false;
     try {
-      //response = await axios.get(`${BASE_API_URL}/${query.id}`);
-      response = await fetch(`${BASE_API_URL}/${query.id}`).then(response => response.json());
-      console.log(response);
+      response = await fetch(`${PROMPTS_API_URL}/${query.id}`).then(response => response.json());
     } catch (e) {
       console.log('woops - something went wrong', e);
       notFound = true;
@@ -78,7 +82,6 @@ class FreeformPrompt extends Component {
     for (let i = 0; i < byteString.length; i++) {
         ia[i] = byteString.charCodeAt(i);
     }
-    console.log('----> mime string: ', mimeString);
     return new Blob([ia], {type:mimeString});
   }
 
@@ -92,7 +95,7 @@ class FreeformPrompt extends Component {
     container.removeChild(tempCanvas)
 
     axios
-      .post(`http://localhost:1337/freeformentries`, {
+      .post(ENTRIES_API_URL, {
         geolocation: JSON.stringify({lat: 2222, lon: 2233 }),
         freeformprompt: promptId
         //response: imageData
@@ -114,7 +117,7 @@ class FreeformPrompt extends Component {
         formData.append('field', 'response');
         formData.append('ref', 'freeformentry');
         formData.append('files', blob, `freeform-entry-${new Date().getTime()}.png`);        
-        return fetch('http://localhost:1337/upload', {
+        return fetch(UPLOAD_API_URL, {
           method: 'post',
           body: formData
         });
@@ -288,9 +291,9 @@ class FreeformPrompt extends Component {
               <div className="instructions">Use the flashlight to find your instructions.</div>
               <canvas ref="canvas" width={canvasWidth} height={canvasHeight}
                       id="canvas"></canvas>
-              <div className="canvas-buttons">
-                  <button onClick={this.clearCanvas}>Clear</button>
-                  <button onClick={this.saveCanvas}>Submit</button>
+              <div className="freeform-entry-action-buttons-container">
+                  <button className="freeform-entry-action-button" onClick={this.clearCanvas}>clear</button>
+                  <button className="freeform-entry-action-button" onClick={this.saveCanvas}>submit</button>
               </div>
           </div>
         }
