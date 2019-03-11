@@ -102,21 +102,19 @@ class FreeformPrompt extends Component {
         formData.append('refId', entryId);
         formData.append('field', 'response');
         formData.append('ref', 'freeformentry');
-        formData.append('files', blob);
-        var myHeaders = new Headers();
+        formData.append('files', blob);        
         return fetch('http://localhost:1337/upload', {
           method: 'post',
-          headers: myHeaders,
           body: formData
         });
-        
-        
       })
       .then(response => {
-        console.log(
-          'Great! Saved image too.',
-          response
-        )
+        if (response.ok) {
+          console.log('Woot! Saved Image.');
+        } else {
+          console.log('Failed to Save the image ', response);
+          throw new Error(`Failed to save the image with the following HTTP Code ${response.status}`);
+        }
       })
       .catch(error => {
         // Handle error.
