@@ -37,6 +37,7 @@ class FreeformPrompt extends Component {
     super(props);
     this.saveCanvas = this.saveCanvas.bind(this);
     this.clearCanvas = this.clearCanvas.bind(this);
+    this.resetTempCanvas = this.resetTempCanvas.bind(this);
   }
   
   componentDidMount() {
@@ -44,7 +45,8 @@ class FreeformPrompt extends Component {
       canvasHeight: window.innerHeight,
       canvasWidth: window.innerWidth
     }, () => {
-      this.resetTempCanvas()
+      this.resetTempCanvas();
+      this.clearCanvas();
     })
   }
 
@@ -55,7 +57,9 @@ class FreeformPrompt extends Component {
   }
 
   clearCanvas() {
-    this.ctxt.clearRect(0, 0, this.canvas.width, this.canvas.height)
+    //this.ctxt.clearRect(0, 0, this.canvas.width, this.canvas.height)
+    this.ctxt.fillStyle = '#ffffff';
+    this.ctxt.fillRect(0, 0, this.canvas.width, this.canvas.height);
   }
 
   canvasToBlob = (dataURI) => {
@@ -118,6 +122,14 @@ class FreeformPrompt extends Component {
       .then(response => {
         if (response.ok) {
           console.log('Woot! Saved Image.');
+          window.setTimeout(() => {
+            this.setState({
+              hasSubmitted: false
+            }, () => {
+              this.resetTempCanvas();
+              this.clearCanvas();
+            });
+          }, 3000);
         } else {
           console.log('Failed to Save the image ', response);
           throw new Error(`Failed to save the image with the following HTTP Code ${response.status}`);
@@ -141,7 +153,9 @@ class FreeformPrompt extends Component {
   onTouchDown = (e) => {
     console.log('touch down')
     e.preventDefault()
-    this.state.isDrawing = true
+    this.setState({
+      isDrawing: true
+    });
     let x = (e.type === 'touchstart') ? e.pageX : e.clientX
     let y = (e.type === 'touchstart') ? e.pageY : e.clientY
 
@@ -202,13 +216,15 @@ class FreeformPrompt extends Component {
   }
 
   undo() {
-    this.ctxt.restore()
-    this.ctxt.clearRect(0, 0, this.canvas.width, this.canvas.height)
-    this.ctxt.stroke()
+    this.ctxt.restore();
+    this.ctxt.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    this.ctxt.stroke();
   }
 
   onTouchUp = () => {
-    this.state.isDrawing = false
+    this.setState({
+      isDrawing: false
+    });
     this.ctxt.drawImage(this.tempCanvas, 0, 0);
 
     // Clearing temp canvas
