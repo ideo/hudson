@@ -20,7 +20,7 @@ module.exports = cb => {
       setInterval(() => {
         //console.log('---> fetchAll is: ', fetchAll({}));
         fetchAll({}).then(response => {
-          console.log(response);
+          console.log(response.toJSON());
           client.emit('timer', new Date());
         })
       }, interval);
