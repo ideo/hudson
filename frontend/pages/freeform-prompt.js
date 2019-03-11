@@ -2,7 +2,6 @@ require('isomorphic-fetch');
 
 import Layout from '../components/Layout'
 import React, { Component } from 'react';
-import axios from 'axios';
 import '../style.scss';
 import getConfig from 'next/config';
 
@@ -90,62 +89,66 @@ class FreeformPrompt extends Component {
     const blob = this.canvasToBlob(imageData);
     const { id: promptId  } = this.props.data;
     this.setState({ hasSubmitted: true })
-    var tempCanvas = document.getElementById('temp-canvas');
-    var container = document.getElementById('canvas-container');
-    container.removeChild(tempCanvas)
+    const tempCanvas = document.getElementById('temp-canvas');
+    const container = document.getElementById('canvas-container');
+    container.removeChild(tempCanvas);
 
-    axios
-      .post(ENTRIES_API_URL, {
+    fetch(ENTRIES_API_URL, {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
         geolocation: JSON.stringify({lat: 2222, lon: 2233 }),
         freeformprompt: promptId
-        //response: imageData
       })
-      .then(response => {
-        // Handle success.
-        console.log(
-          'Well done, your post has been successfully created: ',
-          response.data
-        );
-        return {
-          entryId: response.data.id
-        }
-      })
-      .then(({ entryId }) => {
-        const formData = new FormData();
-        formData.append('path', 'uploads/freeformentries');
-        formData.append('refId', entryId);
-        formData.append('field', 'response');
-        formData.append('ref', 'freeformentry');
-        formData.append('files', blob, `freeform-entry-${new Date().getTime()}.png`);        
-        return fetch(UPLOAD_API_URL, {
-          method: 'post',
-          body: formData
-        });
-      })
-      .then(response => {
-        if (response.ok) {
-          console.log('Woot! Saved Image.');
-          window.setTimeout(() => {
-            this.setState({
-              hasSubmitted: false
-            }, () => {
-              this.resetTempCanvas();
-              this.clearCanvas();
-            });
-          }, 3000);
-        } else {
-          console.log('Failed to Save the image ', response);
-          throw new Error(`Failed to save the image with the following HTTP Code ${response.status}`);
-        }
-      })
-      .catch(error => {
-        // Handle error.
-        console.log('An error occurred:', error);
+    }).then(response => {
+      return response.json();
+    }).then(response => {
+      // Handle success.
+      console.log(
+        'Well done, your post has been successfully created: ',
+        response
+      );
+      return {
+        entryId: response.id
+      }
+    }).then(({ entryId }) => {
+      const formData = new FormData();
+      const filename = `freeform-entry-${new Date().getTime()}.png`;
+      formData.append('path', 'uploads/freeformentries');
+      formData.append('refId', entryId);
+      formData.append('field', 'response');
+      formData.append('ref', 'freeformentry');
+      formData.append('files', blob, filename);        
+      // Upload the writing
+      return fetch(UPLOAD_API_URL, {
+        method: 'post',
+        body: formData
       });
+    }).then(response => {
+      if (response.ok) {
+        console.log('Woot! Saved Image.');
+        window.setTimeout(() => {
+          this.setState({
+            hasSubmitted: false
+          }, () => {
+            this.resetTempCanvas();
+            this.clearCanvas();
+          });
+        }, 3000);
+      } else {
+        console.log('Failed to Save the image ', response);
+        throw new Error(`Failed to save the image with the following HTTP Code ${response.status}`);
+      }
+    }).catch(error => {
+      // Handle error.
+      console.log('An error occurred:', error);
+    });
   }
 
   onTouchDown = (e) => {
-    e.preventDefault()
+    e.preventDefault();
     this.setState({
       isDrawing: true
     });
