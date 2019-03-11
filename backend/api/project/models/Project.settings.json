@@ -24,6 +24,10 @@
     "campaigns": {
       "collection": "campaign",
       "via": "project"
+    },
+    "Name": {
+      "default": "",
+      "type": "string"
     }
   }
 }

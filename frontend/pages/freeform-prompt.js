@@ -48,8 +48,30 @@ class FreeformPrompt extends Component {
     this.ctxt.clearRect(0, 0, this.canvas.width, this.canvas.height)
   }
 
+  canvasToBlob = (dataURI) => {
+    // convert base64/URLEncoded data component to raw binary data held in a string
+    let byteString;
+    if (dataURI.split(',')[0].indexOf('base64') >= 0) {
+        byteString = atob(dataURI.split(',')[1]);
+    } else {
+        byteString = unescape(dataURI.split(',')[1]);
+    }
+    // separate out the mime component
+    const mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+
+    // write the bytes of the string to a typed array
+    const ia = new Uint8Array(byteString.length);
+    for (let i = 0; i < byteString.length; i++) {
+        ia[i] = byteString.charCodeAt(i);
+    }
+
+    return new Blob([ia], {type:mimeString});
+  }
+
   saveCanvas = () => {
-    var imageData = this.canvas.toDataURL("image/png")
+    const imageData = this.canvas.toDataURL("image/png");
+    const blob = this.canvasToBlob(imageData);
+
     const { id: promptId  } = this.props.data
     console.log('----> id is: ', promptId)
     
@@ -61,8 +83,8 @@ class FreeformPrompt extends Component {
     axios
       .post(`http://localhost:1337/freeformentries`, {
         geolocation: JSON.stringify({lat: 2222, lon: 2233 }),
-        freeformprompt: promptId,
-        response: imageData
+        freeformprompt: promptId
+        //response: imageData
       })
       .then(response => {
         // Handle success.
@@ -70,6 +92,31 @@ class FreeformPrompt extends Component {
           'Well done, your post has been successfully created: ',
           response.data
         );
+        return {
+          entryId: response.data.id
+        }
+      })
+      .then(({ entryId }) => {
+        const formData = new FormData();
+        formData.append('path', 'uploads/freeformentries');
+        formData.append('refId', entryId);
+        formData.append('field', 'response');
+        formData.append('ref', 'freeformentry');
+        formData.append('files', blob);
+        var myHeaders = new Headers();
+        return fetch('http://localhost:1337/upload', {
+          method: 'post',
+          headers: myHeaders,
+          body: formData
+        });
+        
+        
+      })
+      .then(response => {
+        console.log(
+          'Great! Saved image too.',
+          response
+        )
       })
       .catch(error => {
         // Handle error.

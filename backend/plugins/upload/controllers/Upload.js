@@ -22,7 +22,7 @@ module.exports = {
       strapi.log.error('File upload is disabled');
       return ctx.badRequest(null, ctx.request.admin ? [{ messages: [{ id: 'Upload.status.disabled' }] }] : 'File upload is disabled');
     }
-
+    console.log('\n', ctx.request.headers, '\n');
     // Extract optional relational data.
     const { refId, ref, source, field, path } = ctx.request.body.fields;
     const { files = {} } = ctx.request.body.files;
