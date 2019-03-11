@@ -44,6 +44,14 @@
     "instructions": {
       "default": "",
       "type": "text"
+    },
+    "linethickness": {
+      "default": 2,
+      "type": "integer"
+    },
+    "linecolor": {
+      "default": "#000000",
+      "type": "string"
     }
   }
 }

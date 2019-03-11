@@ -249,19 +249,19 @@ class FreeformPrompt extends Component {
     this.mouse = {x: 0, y: 0}
     this.lastMouse = {x: 0, y: 0}
     this.points = []
-    this.tempCanvas = this.createTempCanvas()
+    this.tempCanvas = this.createTempCanvas();
 
-    this.tempCanvas.addEventListener("mousedown", this.onTouchDown)
-    this.tempCanvas.addEventListener("mousemove", this.onTouchMove)
-    this.tempCanvas.addEventListener("mouseup", this.onTouchUp)
+    this.tempCanvas.addEventListener('mousedown', this.onTouchDown);
+    this.tempCanvas.addEventListener('mousemove', this.onTouchMove);
+    this.tempCanvas.addEventListener('mouseup', this.onTouchUp);
 
-    this.tempCanvas.addEventListener("touchstart", this.onTouchDown)
-    this.tempCanvas.addEventListener("touchmove", this.onTouchMove)
-    this.tempCanvas.addEventListener("touchend", this.onTouchUp)
+    this.tempCanvas.addEventListener('touchstart', this.onTouchDown);
+    this.tempCanvas.addEventListener('touchmove', this.onTouchMove);
+    this.tempCanvas.addEventListener('touchend', this.onTouchUp);
 
-    this.tempCtxt = this.tempCanvas.getContext('2d')
-    this.tempCtxt.strokeStyle = this.props.strokeColor
-    this.tempCtxt.lineWidth = this.props.strokeWidth
+    this.tempCtxt = this.tempCanvas.getContext('2d');
+    this.tempCtxt.strokeStyle = this.props.data.linecolor || '#000000';
+    this.tempCtxt.lineWidth = this.props.data.linethickness || 2;
     this.tempCtxt.lineJoin= 'round'
     this.tempCtxt.lineCap = 'round'
     this.ctxt = canvas.getContext('2d')
