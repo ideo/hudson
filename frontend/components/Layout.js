@@ -30,7 +30,7 @@ class Layout extends React.Component {
         </Head>
         <header>
         </header>
-        <div className="container-fluid">
+        <div>
           {children}
         </div>
       </div>
