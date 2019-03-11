@@ -142,19 +142,9 @@ class FreeformPrompt extends Component {
         // Handle error.
         console.log('An error occurred:', error);
       });
-
-    // $.post('/note', { imageData: imageData }, (data) => {
-    //   console.log('success')
-
-    //   setTimeout(() => {
-    //     this.setState({ hasSubmitted: false })
-    //     this.resetTempCanvas()
-    //   }, 10000)
-    // })
   }
 
   onTouchDown = (e) => {
-    console.log('touch down')
     e.preventDefault()
     this.setState({
       isDrawing: true
@@ -283,14 +273,20 @@ class FreeformPrompt extends Component {
         {notFound && <h1>Woops. Prompt does not exist.</h1>}
         {
           hasSubmitted ?
-          <div className="canvas-text">
+          <div className="freeform-confirmation-message">
             <p>Brave words.</p>
             <p>Your secret will appear on the monitors throughout the evening.</p>
           </div> :
           <div className="canvas-container" id="canvas-container">
-              <div className="instructions">Use the flashlight to find your instructions.</div>
-              <canvas ref="canvas" width={canvasWidth} height={canvasHeight}
-                      id="canvas"></canvas>
+              <div className="instructions">
+                Use the flashlight to find your instructions.
+              </div>
+              <canvas 
+                ref="canvas" 
+                width={canvasWidth} 
+                height={canvasHeight}
+                id="canvas">
+              </canvas>
               <div className="freeform-entry-action-buttons-container">
                   <button className="freeform-entry-action-button" onClick={this.clearCanvas}>clear</button>
                   <button className="freeform-entry-action-button" onClick={this.saveCanvas}>submit</button>

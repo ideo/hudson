@@ -1,3 +1,6 @@
+// imports
+@import './node_modules/css-reset-and-normalize/scss/reset-and-normalize.scss';
+
 // variables
 $green: #00D8A7;
 $white: #fff;
@@ -5,48 +8,14 @@ $white: #fff;
 html, body {
   font-family: 'Major Mono Display', monospace;
   box-sizing: border-box;
+  font-size: 16px;
 }
+
 #canvas, #temp-canvas {
 	position: absolute;
 	left: 0px; right: 0;
 	bottom: 0; top: 0;
 	cursor: crosshair;
-}
-
-@media screen and (max-width: 1024px) {
-  .freeform-entry-action-button {
-      font-size: 60px;
-      padding: 25px;
-  }
-
-  .transcription-submit {
-      width: 100%;
-      font-size: 20px;
-  }
-
-  .transcription-text {
-      width: 100%;
-  }
-}
-
-.freeform-entry-action-button {
-  width: 50%;
-  padding: 10px;
-  border: none;
-  font-size: 60px;
-  border-radius: 4px;
-  color: $green;
-  transition: 300ms background-color ease-out;
-  font-family: 'Major Mono Display', monospace;
-
-  &:hover, &:focus, &:active {
-    color: $white;
-    background-color: $green;
-  }
-
-  &:focus {
-      outline: 0;
-  }
 }
 
 .canvas-container {
@@ -60,23 +29,56 @@ html, body {
   position: absolute;
   width: 100%;
   bottom: 0;
+  left: 0;
+  right: 0;
   z-index: 2;
   cursor: pointer;
 }
 
-.canvas-text {
-  font-size: 48px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  margin: 80px;
-  height: 100%;
-  margin-top: 0px;
-  user-select: none;
-  p {
-      margin-bottom: 20px;
-      margin-top: 0px;
+.freeform-entry-action-button {
+  width: 50%;
+  padding: 10px;
+  border: none;
+  color: $green;
+  background: $white;
+  transition: 300ms background-color ease-out;
+  font-family: 'Major Mono Display', monospace;
+
+  &:hover, &:focus, &:active {
+    color: $white;
+    background-color: $green;
+  }
+
+  &:focus {
+      outline: 0;
+  }
+}
+
+.freeform-confirmation-message {
+
+}
+
+@media screen and (min-width: 320px) {
+  .freeform-entry-action-button {
+    font-size: 1.2em;
+    padding: 1.2em;
+  }
+  html, body {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .freeform-entry-action-button {
+    font-size: 1.5em;
+    padding: 1.5em;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .freeform-entry-action-button {
+    font-size: 2em;
+    padding: 2em;
   }
 }

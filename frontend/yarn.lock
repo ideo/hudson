@@ -1830,6 +1830,11 @@ css-loader@1.0.0:
     postcss-value-parser "^3.3.0"
     source-list-map "^2.0.0"
 
+css-reset-and-normalize@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/css-reset-and-normalize/-/css-reset-and-normalize-2.0.1.tgz#7781d98cb94d20b36801ca87aad96607ed1fc17e"
+  integrity sha512-2JdXy4P4VYEruwNyC03tiUcXVwxPtE+0NDH09M6aSgJUaDsYmkOhXrqF45EZhNZFvJ/o884zedzc72wX59KTKg==
+
 css-selector-tokenizer@^0.7.0:
   version "0.7.1"
   resolved "https://registry.yarnpkg.com/css-selector-tokenizer/-/css-selector-tokenizer-0.7.1.tgz#a177271a8bca5019172f4f891fc6eed9cbf68d5d"
