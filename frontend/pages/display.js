@@ -30,7 +30,7 @@ class Display extends Component {
 
   subscribeToTimer(cb) {
     socket.on('timer', timestamp => cb(null, timestamp));
-    socket.emit('subscribeToTimer', 1000);
+    socket.emit('subscribeToTimer', 5000);
   }
   
   componentDidMount() {
