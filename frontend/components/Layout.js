@@ -1,10 +1,7 @@
 /* /components/Layout.js */
 
-import React from "react";
-import Head from "next/head";
-
-import { Container } from "reactstrap";
-
+import React from 'react';
+import Head from 'next/head';
 
 class Layout extends React.Component {
   constructor(props) {
@@ -33,7 +30,9 @@ class Layout extends React.Component {
         </Head>
         <header>
         </header>
-        <Container fluid={true}>{children}</Container>
+        <div className="container-fluid">
+          {children}
+        </div>
       </div>
     );
   }
