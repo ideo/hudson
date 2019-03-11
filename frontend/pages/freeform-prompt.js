@@ -1,3 +1,5 @@
+require('isomorphic-fetch');
+
 import Layout from '../components/Layout'
 import React, { Component } from 'react';
 import axios from 'axios';
@@ -17,18 +19,26 @@ class FreeformPrompt extends Component {
     let response = { data: '' };
     let notFound = false;
     try {
-      response = await axios.get(`${BASE_API_URL}/${query.id}`);
+      //response = await axios.get(`${BASE_API_URL}/${query.id}`);
+      response = await fetch(`${BASE_API_URL}/${query.id}`).then(response => response.json());
+      console.log(response);
     } catch (e) {
-      console.log('woops - something went wrong');
+      console.log('woops - something went wrong', e);
       notFound = true;
     }
 
     return {
-      data: response.data,
+      data: response,
       notFound
     };
   }
 
+  constructor(props) {
+    super(props);
+    this.saveCanvas = this.saveCanvas.bind(this);
+    this.clearCanvas = this.clearCanvas.bind(this);
+  }
+  
   componentDidMount() {
     this.setState({
       canvasHeight: window.innerHeight,
@@ -44,7 +54,7 @@ class FreeformPrompt extends Component {
     canvas.removeEvenmonitors("mouseup", this.onTouchUp)
   }
 
-  clearCanvas = () => {
+  clearCanvas() {
     this.ctxt.clearRect(0, 0, this.canvas.width, this.canvas.height)
   }
 
@@ -64,20 +74,17 @@ class FreeformPrompt extends Component {
     for (let i = 0; i < byteString.length; i++) {
         ia[i] = byteString.charCodeAt(i);
     }
-
+    console.log('----> mime string: ', mimeString);
     return new Blob([ia], {type:mimeString});
   }
 
-  saveCanvas = () => {
+  saveCanvas(){
     const imageData = this.canvas.toDataURL("image/png");
     const blob = this.canvasToBlob(imageData);
-
-    const { id: promptId  } = this.props.data
-    console.log('----> id is: ', promptId)
-    
+    const { id: promptId  } = this.props.data;
     this.setState({ hasSubmitted: true })
-    var tempCanvas = document.getElementById("temp-canvas")
-    var container = document.getElementById('canvas-container')
+    var tempCanvas = document.getElementById('temp-canvas');
+    var container = document.getElementById('canvas-container');
     container.removeChild(tempCanvas)
 
     axios
@@ -102,7 +109,7 @@ class FreeformPrompt extends Component {
         formData.append('refId', entryId);
         formData.append('field', 'response');
         formData.append('ref', 'freeformentry');
-        formData.append('files', blob);        
+        formData.append('files', blob, `freeform-entry-${new Date().getTime()}.png`);        
         return fetch('http://localhost:1337/upload', {
           method: 'post',
           body: formData
