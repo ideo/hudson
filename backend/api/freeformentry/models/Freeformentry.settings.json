@@ -28,6 +28,10 @@
     "freeformprompt": {
       "model": "freeformprompt",
       "via": "freeformentries"
+    },
+    "displayed_at": {
+      "default": "",
+      "type": "date"
     }
   }
 }
