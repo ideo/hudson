@@ -14,7 +14,7 @@ app.prepare()
 			const actualPage = '/freeform-prompt';
 			const queryParams = { id: req.params.id }
 			console.dir('req.params.id = ' + JSON.stringify(req.params.id));
-			app.render(req, res, actualPage, queryParams)
+			app.render(req, res, actualPage, queryParams);
 		})
 
 		server.get('*', (req, res) => {
