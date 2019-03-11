@@ -245,10 +245,10 @@ class FreeformPrompt extends Component {
   }
 
   resetTempCanvas() {
-    this.canvas = this.refs.canvas
-    this.mouse = {x: 0, y: 0}
-    this.lastMouse = {x: 0, y: 0}
-    this.points = []
+    this.canvas = this.refs.canvas;
+    this.mouse = {x: 0, y: 0};
+    this.lastMouse = {x: 0, y: 0};
+    this.points = [];
     this.tempCanvas = this.createTempCanvas();
 
     this.tempCanvas.addEventListener('mousedown', this.onTouchDown);
@@ -262,12 +262,12 @@ class FreeformPrompt extends Component {
     this.tempCtxt = this.tempCanvas.getContext('2d');
     this.tempCtxt.strokeStyle = this.props.data.linecolor || '#000000';
     this.tempCtxt.lineWidth = this.props.data.linethickness || 2;
-    this.tempCtxt.lineJoin= 'round'
-    this.tempCtxt.lineCap = 'round'
-    this.ctxt = canvas.getContext('2d')
+    this.tempCtxt.lineJoin= 'round';
+    this.tempCtxt.lineCap = 'round';
+    this.ctxt = canvas.getContext('2d');
 
-    var container = document.getElementById('canvas-container')
-    container.appendChild(this.tempCanvas)
+    var container = document.getElementById('canvas-container');
+    container.appendChild(this.tempCanvas);
   }
 
 
