@@ -4,6 +4,7 @@
 // variables
 $green: #00D8A7;
 $white: #fff;
+$black: #000;
 
 html, body {
   font-family: 'Major Mono Display', monospace;
@@ -44,7 +45,7 @@ html, body {
   transition: 300ms background-color ease-out;
   font-family: 'Major Mono Display', monospace;
 
-  &:hover, &:focus, &:active {
+  &:hover, &:active {
     color: $white;
     background-color: $green;
   }
@@ -54,8 +55,23 @@ html, body {
   }
 }
 
-.freeform-confirmation-message {
+.freeform-thankyou-message-container {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: $black;
+  color: $green;
+  z-index: 100;
+}
 
+.freeform-thankyou-message {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: block;
 }
 
 @media screen and (min-width: 320px) {
@@ -67,6 +83,9 @@ html, body {
     width: 100%;
     height: 100%;
   }
+  .freeform-thankyou-message {
+    font-size: 1.3em;
+  }
 }
 
 @media screen and (min-width: 768px) {
@@ -74,11 +93,17 @@ html, body {
     font-size: 1.5em;
     padding: 1.5em;
   }
+  .freeform-thankyou-message {
+    font-size: 1.5em;
+  }
 }
 
 @media screen and (min-width: 1024px) {
   .freeform-entry-action-button {
     font-size: 2em;
     padding: 2em;
+  }
+  .freeform-thankyou-message {
+    font-size: 1.8em;
   }
 }

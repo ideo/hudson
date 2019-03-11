@@ -31,15 +31,15 @@ module.exports = {
   // After creating a value.
   // Fired after an `insert` query.
   afterCreate: async (model, attrs, options) => {
-    console.log('afterCreate called for Freeformprompt. ');
+    // console.log('afterCreate called for Freeformprompt. ');
     
-    const { attributes: { provocation } } = model;
-    const filename = path.join(__dirname, `./freeform-prompt-${uuidv1()}`);
-    const data = new Uint8Array(Buffer.from(provocation));
-    fs.writeFile(filename, data, (err) => {
-      if (err) throw err;
-      console.log('The file has been saved!');
-    });
+    // const { attributes: { provocation } } = model;
+    // const filename = path.join(__dirname, `./freeform-prompt-${uuidv1()}`);
+    // const data = new Uint8Array(Buffer.from(provocation));
+    // fs.writeFile(filename, data, (err) => {
+    //   if (err) throw err;
+    //   console.log('The file has been saved!');
+    // });
     
 
 

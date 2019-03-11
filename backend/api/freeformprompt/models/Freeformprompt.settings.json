@@ -20,7 +20,7 @@
       "default": "Any additional description we might need to add. This is not user facing.",
       "type": "text"
     },
-    "Thank you message timeout": {
+    "thankyoumessagetimeout": {
       "default": 5,
       "type": "integer",
       "required": true
@@ -29,13 +29,21 @@
       "collection": "freeformentry",
       "via": "freeformprompt"
     },
-    "Install site": {
+    "installsite": {
       "default": "",
       "type": "text"
     },
     "campaign": {
       "model": "campaign",
       "via": "freeformprompts"
+    },
+    "thankyoumessage": {
+      "default": "Thank you for sharing your thoughts! Your messages will appear on the screen throughout the night.",
+      "type": "text"
+    },
+    "instructions": {
+      "default": "",
+      "type": "text"
     }
   }
 }

@@ -21,7 +21,7 @@ class FreeformPrompt extends Component {
 
   static async getInitialProps({ query }) {
     // TODO: account for case without query ID
-    let response = { data: '' };
+    let response = {};
     let notFound = false;
     try {
       response = await fetch(`${PROMPTS_API_URL}/${query.id}`).then(response => response.json());
@@ -29,7 +29,8 @@ class FreeformPrompt extends Component {
       console.log('woops - something went wrong', e);
       notFound = true;
     }
-
+    console.log('response is: ', response);
+    
     return {
       data: response,
       notFound
@@ -87,7 +88,10 @@ class FreeformPrompt extends Component {
   saveCanvas(){
     const imageData = this.canvas.toDataURL("image/png");
     const blob = this.canvasToBlob(imageData);
-    const { id: promptId  } = this.props.data;
+    const { 
+      id: promptId,
+      thankyoumessagetimeout
+    } = this.props.data;
     this.setState({ hasSubmitted: true })
     const tempCanvas = document.getElementById('temp-canvas');
     const container = document.getElementById('canvas-container');
@@ -136,7 +140,7 @@ class FreeformPrompt extends Component {
             this.resetTempCanvas();
             this.clearCanvas();
           });
-        }, 3000);
+        }, thankyoumessagetimeout * 1000);
       } else {
         console.log('Failed to Save the image ', response);
         throw new Error(`Failed to save the image with the following HTTP Code ${response.status}`);
@@ -269,16 +273,17 @@ class FreeformPrompt extends Component {
 
 
   render() {
-    const { notFound, data } = this.props
+    const { notFound, data: { thankyoumessage } } = this.props
     const { hasSubmitted, canvasWidth, canvasHeight } = this.state
     return (
       <Layout>
         {notFound && <h1>Woops. Prompt does not exist.</h1>}
         {
           hasSubmitted ?
-          <div className="freeform-confirmation-message">
-            <p>Brave words.</p>
-            <p>Your secret will appear on the monitors throughout the evening.</p>
+          <div className="freeform-thankyou-message-container">
+            <p className="freeform-thankyou-message">
+              { thankyoumessage }
+            </p>
           </div> :
           <div className="canvas-container" id="canvas-container">
               <div className="instructions">
