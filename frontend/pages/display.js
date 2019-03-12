@@ -99,17 +99,16 @@ class Display extends Component {
         
         {!notFound && <p className="message-body">{ transcription }</p>}
         <div className="blobs-container">
-          <svg version="1.1" xmlns="http://www.w3.org/2000/svg" id="loader">
+          <svg version="1.1" xmlns="http://www.w3.org/2000/svg" id="blobs-parent">
             <defs>
               <filter id="goo">
                 <feGaussianBlur in="SourceGraphic" result="blur" stdDeviation="10" />
                 <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7" result="goo" />
                 <feBlend in2="goo" in="SourceGraphic" result="mix" />
               </filter>
-              <linearGradient id="MyGradient">
-                  <stop offset="5%"  stopColor="#40204c"/>
-                  <stop offset="40%" stopColor="#a3225c"/>
-                  <stop offset="100%" stopColor="#e24926"/>
+              <linearGradient id="MyGradient1">
+                  <stop offset="50%"  stopColor="rgb(196, 129, 96)"/>
+                  <stop offset="100%" stopColor="rgb(181, 76, 58)"/>
               </linearGradient>
             </defs>
             <mask id="maska">
@@ -121,7 +120,7 @@ class Display extends Component {
                 <circle className="blob" cx="470" cy="450" r="20"  transform="rotate(0) translate(0, 0) rotate(0)"/>
               </g>
             </mask>
-            <rect x="200" y="200"  mask="url(#maska)" fill="url(#MyGradient)" width="400" height="400"></rect>
+            <rect x="200" y="200"  mask="url(#maska)" fill="url(#MyGradient1)" width="400" height="400"></rect>
           </svg>	
         </div>
         
