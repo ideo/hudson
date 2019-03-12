@@ -32,6 +32,11 @@
     "displayed_at": {
       "default": "",
       "type": "date"
+    },
+    "is_transcribed": {
+      "default": false,
+      "type": "boolean",
+      "required": true
     }
   }
 }
