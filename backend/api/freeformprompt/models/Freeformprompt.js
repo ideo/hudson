@@ -55,7 +55,7 @@ module.exports = {
   // After updating a value.
   // Fired after an `update` query.
   afterUpdate: async (model, attrs, options) => {
-    console.log('afterUpdate called for Freeformprompt. ');
+    //console.log('afterUpdate called for Freeformprompt. ');
     //console.log('model ', model);
     //console.log('attrs ', attrs);
     //console.log('options ', options);
@@ -68,6 +68,6 @@ module.exports = {
   // After destroying a value.
   // Fired after a `delete` query.
   afterDestroy: async (model, attrs, options) => {
-    console.log('afterDestroy called for Freeformprompt. ');
+    //console.log('afterDestroy called for Freeformprompt. ');
   }
 };
