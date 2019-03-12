@@ -17,9 +17,9 @@ class Layout extends React.Component {
   }
   render() {
     const { children } = this.props;
-    const title = "Freeform Prompt";
+    const title = "Hudson";
     return (
-      <div>
+      <div style={{ height: '100vh', width: '100vw' }}>
         <Head>
           <title>{title}</title>
           <meta charSet="utf-8" />
@@ -30,7 +30,7 @@ class Layout extends React.Component {
         </Head>
         <header>
         </header>
-        <div>
+        <div style={{ height: '100vh', width: '100vw' }}>
           {children}
         </div>
       </div>

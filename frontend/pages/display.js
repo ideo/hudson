@@ -10,6 +10,9 @@ const { publicRuntimeConfig } = getConfig();
 const { BASE_API_URL } = publicRuntimeConfig;
 const PROMPTS_API_URL = `${BASE_API_URL}/freeformprompts`;
 
+import {TweenMax, Linear} from 'gsap';
+
+
 class Display extends Component {
   state = {
     transcription: 'No messages received yet. This is placeholder.'
@@ -54,7 +57,31 @@ class Display extends Component {
       this.setState({
         transcription
       });
-    })
+    });
+
+    let radius = 8;
+    TweenMax.staggerFromTo('.blob', 4 , {
+      cycle: {
+        attr(i) {
+          let r = i*90;
+          return {
+            transform:`rotate(${r}) translate(${radius},0.1) rotate(-${r})`
+          }      
+        }
+      }  
+    },{
+      cycle: {
+        attr(i) {
+          let r = i*90+360;
+          return {
+            transform:`rotate(${r}) translate(${radius},0.1) rotate(-${r})`
+          }      
+        }
+      },
+      ease: Linear.easeInOut,
+      repeat: -1
+    });
+
   }
 
   componentWillUnMount() {
@@ -70,6 +97,7 @@ class Display extends Component {
       <Layout>
         {notFound && <h1>Ah nuts. Couln't find the related prompt. Check the URL?</h1>}
         
+        {!notFound && <p className="message-body">{ transcription }</p>}
         <div className="loading_cont">
           <svg version="1.1" xmlns="http://www.w3.org/2000/svg" id="loader">
             <defs>
@@ -97,7 +125,6 @@ class Display extends Component {
           </svg>	
         </div>
         
-        {!notFound && transcription }
       </Layout>
     );
   }

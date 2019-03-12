@@ -1,17 +1,30 @@
+// imports
+@import './node_modules/css-reset-and-normalize/scss/reset-and-normalize.scss';
+
+// variables
+$green: #00D8A7;
+$white: #fff;
+$black: #000;
+$blue: #152a8e;
+$pink: #b1376c;
+
 body {
   margin: 0;
-  height: 100vh;
+  height: 100%;
+  width: 100%;
   overflow: hidden;
+  font-family: 'Major Mono Display', monospace;
+  font-family: 16px;
 }
 
 .loading_cont {
   width: 100%;
   height: 100%;
-  background: red;
-  background: -webkit-linear-gradient(left top, #152a8e, #b1376c);
-  background: -o-linear-gradient(bottom right, #152a8e, #b1376c);
-  background: -moz-linear-gradient(bottom right, #152a8e, #b1376c);
-  background: linear-gradient(to bottom right, #152a8e, #b1376c);
+  background: $green;
+  background: -webkit-linear-gradient(left top, $blue, $pink);
+  background: -o-linear-gradient(bottom right, $blue, $pink);
+  background: -moz-linear-gradient(bottom right, $blue, $pink);
+  background: linear-gradient(to bottom right, $blue, $pink);
 }
 
 .loading_cont:before {
@@ -27,13 +40,12 @@ body {
 
 #loader {
   display: inline-block;
-  position: relative;
-  width: 800px;
-  height: 800px;
+  position: absolute;
+  width: 80%;
+  height: 80%;
   top: 50%;
   left: 50%;
-  margin-left: -400px;
-  margin-top: -400px;
+  transform: translate(-50%, -50%);
 }
 
 rect {
@@ -49,3 +61,15 @@ filter: url("#goo");
 .blob {
   fill: white;
 }
+
+.message-body {
+  color: $white;
+  position: absolute;
+  display: block;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+  font-size: 6em;
+}
+
