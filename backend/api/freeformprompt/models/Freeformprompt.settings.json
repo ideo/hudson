@@ -52,6 +52,10 @@
     "linecolor": {
       "default": "#000000",
       "type": "string"
+    },
+    "displaytimeout": {
+      "default": "",
+      "type": "integer"
     }
   }
 }

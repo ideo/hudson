@@ -23,7 +23,10 @@ module.exports = {
 
   // Before creating a value.
   // Fired before an `insert` query.
-  // beforeCreate: async (model, attrs, options) => {},
+  beforeCreate: async (model, attrs, options) => {
+    console.log('before create!');
+    model.set('displayed_at', new Date());
+  },
 
   // After creating a value.
   // Fired after an `insert` query.
