@@ -17,7 +17,8 @@ body {
   font-family: 16px;
 }
 
-.loading_cont {
+.blobs-container {
+  border: 5px solid $white;
   width: 100%;
   height: 100%;
   background: $green;
@@ -27,7 +28,7 @@ body {
   background: linear-gradient(to bottom right, $blue, $pink);
 }
 
-.loading_cont:before {
+.blobs-container:before {
   content: "";
   position: absolute;
   width: 100%;

@@ -98,7 +98,7 @@ class Display extends Component {
         {notFound && <h1>Ah nuts. Couln't find the related prompt. Check the URL?</h1>}
         
         {!notFound && <p className="message-body">{ transcription }</p>}
-        <div className="loading_cont">
+        <div className="blobs-container">
           <svg version="1.1" xmlns="http://www.w3.org/2000/svg" id="loader">
             <defs>
               <filter id="goo">
