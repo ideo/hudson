@@ -251,7 +251,6 @@ const search = async (params) => {
   });
 }
 
-
 module.exports = {
   fetch,
   fetchAll,
