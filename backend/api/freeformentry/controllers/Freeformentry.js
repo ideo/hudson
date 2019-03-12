@@ -15,7 +15,6 @@ module.exports = {
    */
 
   find: async (ctx) => {
-    console.log('ctx is: ', ctx.query);
     if (ctx.query._q) {
       return strapi.services.freeformentry.search(ctx.query);
     } else {
