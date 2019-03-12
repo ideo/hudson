@@ -9,27 +9,38 @@
  */
 
 module.exports = cb => {
-  //console.log('----> strapi services: ', );
+  // import socket io
+  let displayTimerStarted = false;
+  const io = require('socket.io')(strapi.server);
   const fetchForDisplay = strapi.services.freeformentry.fetchForDisplay;
   const edit = strapi.services.freeformentry.edit;
-  // import socket io
-  const io = require('socket.io')(strapi.server);
+
+  const displayTimer = (socket, interval) => {
+    setInterval(() => {
+      fetchForDisplay().then(response => {
+        const serializedResponse = response.toJSON()[0];
+        const { id, transcription } = serializedResponse;
+        socket.emit('timer', transcription);
+        edit({ id }, {displayed_at: new Date()}); // returns promise
+      });        
+    }, interval);
+  }
+
   //listen for user connection
   io.on('connection', (client) => {
     client.on('subscribeToTimer', (interval) => {
-      //console.log('client is subscribing to timer with interval ', interval);
-      setInterval(() => {
-        fetchForDisplay().then(response => {
-          const serializedResponse = response.toJSON()[0];
-          const { id, transcription } = serializedResponse;
-          client.emit('timer', transcription + ' ' + id);
-          edit({ id }, {displayed_at: new Date()}).then(response => {
-            console.log('Updated `displayed_at` ', response.toJSON());
-          });
-        });        
-      }, interval);
+      console.log('----> has timer started? ', displayTimerStarted);
+      if (!displayTimerStarted) {
+        console.log('----> Nope. Go ahead and start it.');
+        displayTimer(client, interval);
+        displayTimerStarted = true;
+        console.log('---> Has it started now? ', displayTimerStarted);
+      }
     });
-    client.on('disconnect', () => console.log('a user disconnected'));
+    client.on('disconnect', () => {
+      console.log('a user disconnected');
+      // should we clean up here?
+    });
   });
   strapi.io = io; // register socket io inside strapi main object to use it globally anywhere
   cb();

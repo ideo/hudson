@@ -12,13 +12,13 @@ app.prepare()
 
 		server.get('/freeform/:id', (req, res) => {
 			const actualPage = '/freeform-prompt';
-			const queryParams = { id: req.params.id }
+			const queryParams = { id: req.params.id };
 			app.render(req, res, actualPage, queryParams);
 		})
 
 		server.get('/display/:id', (req, res) => {
 			const actualPage = '/display';
-			const queryParams = { id: req.params.id }
+			const queryParams = { id: req.params.id };
 			app.render(req, res, actualPage, queryParams);
 		})
 
