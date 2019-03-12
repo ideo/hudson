@@ -20,7 +20,9 @@ module.exports = cb => {
       fetchForDisplay().then(response => {
         const serializedResponse = response.toJSON()[0];
         const { id, transcription } = serializedResponse;
-        socket.emit('timer', transcription);
+        //socket.emit('timer', transcription);
+        io.emit('timer', transcription); // this broadcasts to all clients
+        console.log('Emitting: ', transcription);
         edit({ id }, {displayed_at: new Date()}); // returns promise
       });        
     }, interval);
