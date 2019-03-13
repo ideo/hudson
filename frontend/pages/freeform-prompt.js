@@ -29,7 +29,6 @@ class FreeformPrompt extends Component {
       console.log('woops - something went wrong', e);
       notFound = true;
     }
-    console.log('response is: ', response);
     
     return {
       data: response,
