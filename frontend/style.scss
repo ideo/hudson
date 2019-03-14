@@ -12,6 +12,10 @@ $orange2: rgb(181, 76, 58);
 $yellow: rgb(208, 175, 98);
 $pink: #b1376c;
 
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: white;
+  opacity: 1; /* Firefox */
+}
 
 html, body {
   font-family: 'Major Mono Display', monospace;
@@ -127,12 +131,13 @@ html, body {
 .contact-form {
   position: absolute;
   font-size: 1.4em;
-  top: 30%;
-  bottom: 30%;
-  right: 30%;
-  left: 30%;
+  top: 20%;
+  bottom: 20%;
+  right: 20%;
+  left: 20%;
 
   .contact-submit {
+    font-size: 1.4em;
     text-align: center;
     &:hover, &:active {
       color: white;
@@ -141,6 +146,7 @@ html, body {
   }
 
   input {
+    font-size: 1.5em;
     width: 100%;
     margin-bottom: 0.5em;
     outline: none;
