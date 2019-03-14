@@ -109,7 +109,9 @@ class FreeformPrompt extends Component {
       },
       body: JSON.stringify({
         geolocation: JSON.stringify({lat: 2222, lon: 2233 }),
-        freeformprompt: promptId
+        freeformprompt: promptId,
+        transcription: '',
+        is_transcribed: false
       })
     }).then(response => {
       return response.json();
