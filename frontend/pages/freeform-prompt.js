@@ -11,6 +11,12 @@ const PROMPTS_API_URL = `${BASE_API_URL}/freeformprompts`;
 const ENTRIES_API_URL = `${BASE_API_URL}/freeformentries`;
 const UPLOAD_API_URL = `${BASE_API_URL}/upload`;
 
+console.log(
+  'ENTRIES_API_URL -> ', ENTRIES_API_URL,
+  'ENTRIES_API_URL -> ', ENTRIES_API_URL,
+  'UPLOAD_API_URL -> ', UPLOAD_API_URL
+)
+
 class FreeformPrompt extends Component {
   state = {
     isDrawing: false,
