@@ -148,7 +148,7 @@ class FreeformPrompt extends Component {
             this.resetTempCanvas();
             this.clearCanvas();
           });
-        }, thankyoumessagetimeout * 10000);
+        }, thankyoumessagetimeout * 1000);
       } else {
         console.log('Failed to Save the image ', response);
         throw new Error(`Failed to save the image with the following HTTP Code ${response.status}`);

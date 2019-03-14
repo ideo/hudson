@@ -116,10 +116,13 @@ class Contact extends Component {
           </div>
         }
         <div className="contact-container">
-          <input onChange={this.updateName}  className="input-name" type="text"></input>
-          <input onChange={this.updateCompany} className="input-company" type="text"></input>
-          <input onChange={this.updateEmail} className="input-email" type="email"></input>
-          <button onClick={this.submit}>Submit</button>
+          <form className="contact-form" onSubmit={this.submit}>
+            <input onChange={this.updateName} placeholder="Name"  className="input-name" type="text"></input>
+            <input onChange={this.updateCompany} placeholder="Company" className="input-company" type="text"></input>
+            <input onChange={this.updateEmail} placeholder="you@place.are" className="input-email" type="email"></input>
+            <button className="contact-submit" onClick={this.submit}>Submit</button>
+          </form>
+          
         </div>
       </Layout>
     );

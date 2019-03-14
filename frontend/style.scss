@@ -109,7 +109,7 @@ html, body {
   right: 0;
 }
 
-.contact-link {
+.contact-link, .contact-submit {
   margin-top: 200px;
   color: $orange1;
   border: 2px solid $orange1;
@@ -118,6 +118,43 @@ html, body {
   text-align: center;
   border-radius: 500px;
   padding: 10px 15px;
+  &:hover, &:active {
+    background: $orange1;
+    color: black;
+  }
+}
+
+.contact-form {
+  position: absolute;
+  font-size: 1.4em;
+  top: 30%;
+  bottom: 30%;
+  right: 30%;
+  left: 30%;
+
+  .contact-submit {
+    text-align: center;
+    &:hover, &:active {
+      color: white;
+      border-color: white;
+    }
+  }
+
+  input {
+    width: 100%;
+    margin-bottom: 0.5em;
+    outline: none;
+    color: white;
+    border: none;
+    border-bottom: 1px solid white;
+    clear: both;
+    background: transparent;
+    height: 2em;
+  }
+
+}
+
+.contact-link {
   &:hover, &:active {
     background: $orange1;
     color: black;
