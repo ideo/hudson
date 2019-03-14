@@ -5,6 +5,8 @@
 $green: #00D8A7;
 $white: #fff;
 $black: #000;
+$pastel-orange: #be8d5c;
+$light-grey: rgb(240, 240, 240);
 
 html, body {
   font-family: 'Major Mono Display', monospace;
@@ -27,6 +29,7 @@ html, body {
 }
 
 .freeform-entry-action-buttons-container {
+  border-top: 1px solid $light-grey;
   position: absolute;
   width: 100%;
   bottom: 0;
@@ -37,17 +40,20 @@ html, body {
 }
 
 .freeform-entry-action-button {
+  &:first-child {
+    border-right: 1px solid $light-grey;
+  }
   width: 50%;
   padding: 10px;
   border: none;
-  color: $green;
-  background: $white;
-  transition: 300ms background-color ease-out;
+  color: $pastel-orange;
+  background: white;
+  transition: 400ms background-color ease-in-out;
   font-family: 'Major Mono Display', monospace;
 
   &:hover, &:active {
     color: $white;
-    background-color: $green;
+    background: #ddb367;
   }
 
   &:focus {
@@ -61,13 +67,15 @@ html, body {
   bottom: 0;
   right: 0;
   left: 0;
-  background-color: $black;
-  color: $green;
+  background: black;
+  background-size: cover;
   z-index: 100;
+  color: $white;
 }
 
 .freeform-thankyou-message {
   position: absolute;
+  color: $pastel-orange;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);

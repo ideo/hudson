@@ -12,6 +12,32 @@ $orange2: rgb(181, 76, 58);
 $yellow: rgb(208, 175, 98);
 $navy: rgb(45, 56, 70);
 
+.logo {
+  width: 100px;
+  height: auto;
+  display: block;
+  bottom: 10px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  position: absolute;
+  z-index: 100;
+}
+.page-title {
+  background: white;
+  color: $orange1;
+  font-family: 'Roboto', sans-serif;
+  color: $orange1;
+  position: absolute;
+  top: 0px;
+  padding: 15px;
+  font-family: 1.2em;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  left: 50%;
+  transform: translate(-50%);
+  z-index: 100;
+}
+
 body {
   margin: 0;
   height: 100%;

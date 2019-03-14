@@ -70,12 +70,12 @@ class Display extends Component {
     });
 
     let radius = 20;
-    TweenMax.staggerFromTo('.blob-1', 10 , {
+    TweenMax.staggerFromTo('.blob-1', 30 , {
       cycle: {
         attr(i) {
           let r = i*90;
           return {
-            transform:`rotate(${r}) translate(${radius},0.1) rotate(-${r})`
+            transform:`rotate(${r}) translate(${radius},0) rotate(-${r})`
           }      
         }
       }  
@@ -84,7 +84,7 @@ class Display extends Component {
         attr(i) {
           let r = i*90+360;
           return {
-            transform:`rotate(${r}) translate(${radius},0.1) rotate(-${r})`
+            transform:`rotate(${r}) translate(${radius},0) rotate(-${r})`
           }      
         }
       },
@@ -92,12 +92,12 @@ class Display extends Component {
       repeat: -1
     });
 
-    TweenMax.staggerFromTo('.blob-2', 58 , {
+    TweenMax.staggerFromTo('.blob-2', 28 , {
       cycle: {
         attr(i) {
           let r = i*90;
           return {
-            transform:`rotate(${-r}) translate(${radius * 2},0.1) rotate(-${r})`
+            transform:`rotate(${r/2}) translate(${radius},0) rotate(-${r})`
           }      
         }
       }  
@@ -106,7 +106,7 @@ class Display extends Component {
         attr(i) {
           let r = i*90+ 360;
           return {
-            transform:`rotate(${r}) translate(${radius},0.1) rotate(-${r})`
+            transform:`rotate(${r}) translate(${radius},0) rotate(-${r})`
           }      
         }
       },
@@ -114,12 +114,12 @@ class Display extends Component {
       repeat: -1
     });
 
-    TweenMax.staggerFromTo('.blob-3', 4 , {
+    TweenMax.staggerFromTo('.blob-3', 40 , {
       cycle: {
         attr(i) {
           let r = i*90;
           return {
-            transform:`rotate(${r}) translate(${radius},0.1) rotate(-${r})`
+            transform:`rotate(${r}) translate(${radius}, 0) rotate(-${r})`
           }      
         }
       }  
@@ -128,7 +128,7 @@ class Display extends Component {
         attr(i) {
           let r = i*90+360;
           return {
-            transform:`rotate(${r}) translate(${radius * 0.1},0.1) rotate(-${r})`
+            transform:`rotate(${r}) translate(${radius / 10},0) rotate(-${r})`
           }      
         }
       },
@@ -136,10 +136,6 @@ class Display extends Component {
       repeat: -1
     });
 
-  }
-
-  componentWillUnMount() {
-    
   }
 
 
@@ -151,6 +147,9 @@ class Display extends Component {
       <Layout>
         {notFound && <p className="message-body">Ah nuts. Couln't find the related prompt. Check the URL?</p>}
         
+        <h1 className="page-title">What people are sharing about mental health at work</h1>
+        <img className="logo" src="../static/ideo-logo.png" alt="IDEO" />
+
         {!notFound && <p className="message-body">{ transcription }</p>}
         <div className="blobs-container">
           <svg version="1.1" xmlns="http://www.w3.org/2000/svg" id="blobs-parent">
