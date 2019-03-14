@@ -9,7 +9,7 @@ import openSocket from 'socket.io-client';
 const { publicRuntimeConfig } = getConfig();
 const { BASE_API_URL } = publicRuntimeConfig;
 const PROMPTS_API_URL = `${BASE_API_URL}/freeformprompts`;
-
+console.log('BASE_API_URL -> ', BASE_API_URL, '\n', 'PROMPTS_API_URL -> ', PROMPTS_API_URL);
 import {TweenMax, Linear} from 'gsap';
 
 
@@ -24,6 +24,7 @@ class Display extends Component {
 
     try {
       response = await fetch(`${PROMPTS_API_URL}/${query.id}`).then(response => response.json());
+      console.log('display response ----> ', response);
     } catch(e) {
       console.log('woops - something went wrong', e);
       notFound = true;
@@ -47,7 +48,8 @@ class Display extends Component {
 
   componentWillMount() {
     if (this.props.notFound) return;
-    this.socket = openSocket('http://localhost:1337');
+    console.log('socket endpoint ----> ', BASE_API_URL);
+    this.socket = openSocket(BASE_API_URL);
   }
 
   subscribeToTimer(cb) {
