@@ -38,10 +38,15 @@ app.prepare()
 			app.render(req, res, actualPage, queryParams);
 		})
 
-		server.get(['/display/:id', '/index.html'], (req, res) => {
+		server.get(['/display/:id'], (req, res) => {
 			const actualPage = '/display';
 			const queryParams = { id: req.params.id };
 			app.render(req, res, actualPage, queryParams);
+		})
+
+		// temp.
+		server.get(['/index.html'], (req, res) => {
+			res.redirect('/freeform/1')
 		})
 
 		server.get('*', (req, res) => {
