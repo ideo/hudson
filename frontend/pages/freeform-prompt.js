@@ -294,9 +294,14 @@ class FreeformPrompt extends Component {
               <br />
               <br />
               <br />
-              <Link className="contact-link" href={`/contact?campaignId=${data.campaign.id}&promptId=${data.id}`}>
+              <Link href={`/contact?campaignId=${data.campaign.id}&promptId=${data.id}`}>
                 <span className="contact-link">
                   Stay in touch?
+                </span>
+              </Link>
+              <Link href={`/freeform/${data.id}`}>
+                <span className="contact-link hollow">
+                  Maybe later.
                 </span>
               </Link>
             </p>

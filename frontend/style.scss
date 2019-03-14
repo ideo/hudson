@@ -55,7 +55,7 @@ html, body {
   width: 50%;
   padding: 10px;
   border: none;
-  color: $pastel-orange;
+  color: $orange1;
   background: white;
   transition: 400ms background-color ease-in-out;
   font-family: 'Major Mono Display', monospace;
@@ -84,11 +84,12 @@ html, body {
 
 .freeform-thankyou-message {
   position: absolute;
-  color: $pastel-orange;
-  top: 50%;
-  left: 50%;
+  color: $orange1;
+  top: 20%;
+  right: 20%;
+  bottom: 20%;
+  left: 20%;
   line-height: 1.4;
-  transform: translate(-50%, -50%);
   display: block;
 }
 
@@ -115,17 +116,27 @@ html, body {
 
 .contact-link, .contact-submit {
   margin-top: 200px;
-  color: $orange1;
+  background-color: $orange1;
   border: 2px solid $orange1;
   outline: none;
   text-decoration: none;
   text-align: center;
   border-radius: 500px;
+  outline: none;
+  color: white;
   padding: 10px 15px;
   &:hover, &:active {
     background: $orange1;
     color: black;
   }
+  &.hollow {
+    color: $orange1;
+    background-color: transparent;
+  }
+}
+
+.contact-link {
+  border:1px solid white;
 }
 
 .contact-form {
@@ -161,6 +172,7 @@ html, body {
 }
 
 .contact-link {
+  margin-right: 15px;
   &:hover, &:active {
     background: $orange1;
     color: black;
