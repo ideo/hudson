@@ -18,7 +18,8 @@ class Contact extends Component {
   state = {
     name: '',
     email: '',
-    company: ''
+    company: '',
+    success: false
   }
 
   static async getInitialProps({ query }) {
@@ -54,20 +55,26 @@ class Contact extends Component {
   submit = (e) => {
     e.preventDefault();
     const { campaignId, promptId } = this.props;
+    const { name, email, company } = this.state;
     console.log('submit ', this.state);
     fetch(CONTACTS_API_URL, {
       headers: {
         'Content-Type': 'application/json'
       },
       method: 'post',
-      body: JSON.stringify(Object.assign({}, this.state, { campaign: campaignId }))
+      body: JSON.stringify({ 
+        campaign: campaignId,
+        name,
+        email,
+        company 
+      })
     }).then(resp => resp.json())
       .then(response => {
-        if (response.ok) {
-          console.log('Saved contact');
-        } else {
-          console.log('response not ok')
-        }
+        this.setState({ success: true })
+        console.log('Saved contact');
+        window.setTimeout(() => {
+          Router.push(`/freeform/${promptId}`)
+        }, 5000)
        
       }).catch(e => {
         console.log('oh noe', e)
@@ -98,8 +105,16 @@ class Contact extends Component {
 
   render() {
     const { notFound, data} = this.props
+    const { success } = this.state
     return (
       <Layout>
+        {success && 
+          <div style={{ zIndex: 101 }} className="contact-container">
+            <h1 className="contact-thank-you">
+              Thank you for staying in touch!
+            </h1>
+          </div>
+        }
         <div className="contact-container">
           <input onChange={this.updateName}  className="input-name" type="text"></input>
           <input onChange={this.updateCompany} className="input-company" type="text"></input>

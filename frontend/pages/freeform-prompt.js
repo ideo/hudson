@@ -148,7 +148,7 @@ class FreeformPrompt extends Component {
             this.resetTempCanvas();
             this.clearCanvas();
           });
-        }, thankyoumessagetimeout * 1000);
+        }, thankyoumessagetimeout * 10000);
       } else {
         console.log('Failed to Save the image ', response);
         throw new Error(`Failed to save the image with the following HTTP Code ${response.status}`);
@@ -291,25 +291,28 @@ class FreeformPrompt extends Component {
           <div className="freeform-thankyou-message-container">
             <p className="freeform-thankyou-message">
               { thankyoumessage }
-
               <br />
-              <Link href={`/contact?campaignId=${data.campaign.id}&promptId=${data.id}`}>Stay in touch?</Link>
+              <br />
+              <br />
+              <Link className="contact-link" href={`/contact?campaignId=${data.campaign.id}&promptId=${data.id}`}>
+                <span className="contact-link">
+                  Stay in touch?
+                </span>
+              </Link>
             </p>
+            
           </div> :
           <div className="canvas-container" id="canvas-container">
-              <div className="instructions">
-                Use the flashlight to find your instructions.
-              </div>
-              <canvas 
-                ref="canvas" 
-                width={canvasWidth} 
-                height={canvasHeight}
-                id="canvas">
-              </canvas>
-              <div className="freeform-entry-action-buttons-container">
-                  <button className="freeform-entry-action-button" onClick={this.clearCanvas}>clear</button>
-                  <button className="freeform-entry-action-button" onClick={this.saveCanvas}>submit</button>
-              </div>
+            <canvas 
+              ref="canvas" 
+              width={canvasWidth} 
+              height={canvasHeight}
+              id="canvas">
+            </canvas>
+            <div className="freeform-entry-action-buttons-container">
+                <button className="freeform-entry-action-button" onClick={this.clearCanvas}>clear</button>
+                <button className="freeform-entry-action-button" onClick={this.saveCanvas}>submit</button>
+            </div>
           </div>
         }
       </Layout>
