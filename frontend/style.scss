@@ -82,6 +82,8 @@ html, body {
   color: $white;
 }
 
+
+
 .freeform-thankyou-message {
   position: absolute;
   color: $orange1;
@@ -94,14 +96,21 @@ html, body {
 }
 
 .contact-thank-you {
+  top: 20%;
+  bottom: 20%;
+  left: 20%;
+  right: 20%;
   color: white;
-  font-size: 3em;
   text-align: center;
   position: absolute;
   line-height: 1.4;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  h1 {
+    font-size: 3em;
+  }
+  .close-drawer {
+    font-size: 1.2em;
+    text-align: center;
+  }
 }
 
 .contact-container {
@@ -135,7 +144,6 @@ html, body {
   }
 }
 
-
 .contact-form {
   position: absolute;
   font-size: 1.4em;
@@ -155,6 +163,7 @@ html, body {
 
   input {
     font-size: 1.5em;
+    border-radius: none;
     width: 100%;
     margin-bottom: 0.5em;
     outline: none;

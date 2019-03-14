@@ -57,7 +57,6 @@ class Contact extends Component {
     [this.nameEl, this.emailEl, this.companyEl].forEach(el => el.blur());
     const { campaignId, promptId } = this.props;
     const { name, email, company } = this.state;
-    console.log('submit ', this.state);
     fetch(CONTACTS_API_URL, {
       headers: {
         'Content-Type': 'application/json'
@@ -111,9 +110,17 @@ class Contact extends Component {
       <Layout>
         {success && 
           <div style={{ zIndex: 101 }} className="contact-container">
-            <h1 className="contact-thank-you">
-              Thank you for staying in touch!
-            </h1>
+            <div className="contact-thank-you">
+              <h1>
+                Thank you for staying in touch!
+              </h1>
+              <br/>
+              <br/>
+              <br/>
+              <p className="close-drawer">
+                You can close the drawer now, thanks.
+              </p>
+            </div>
           </div>
         }
         <div className="contact-container">
