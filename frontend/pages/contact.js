@@ -54,6 +54,7 @@ class Contact extends Component {
 
   submit = (e) => {
     e.preventDefault();
+    [this.nameEl, this.emailEl, this.companyEl].forEach(el => el.blur());
     const { campaignId, promptId } = this.props;
     const { name, email, company } = this.state;
     console.log('submit ', this.state);
@@ -117,10 +118,10 @@ class Contact extends Component {
         }
         <div className="contact-container">
           <form className="contact-form" onSubmit={this.submit}>
-            <input onChange={this.updateName} placeholder="Name"  className="input-name" type="text"></input>
-            <input onChange={this.updateCompany} placeholder="Company" className="input-company" type="text"></input>
-            <input onChange={this.updateEmail} placeholder="you@place.are" className="input-email" type="email"></input>
-            <button className="contact-submit" onClick={this.submit}>Submit</button>
+            <input ref={input => this.nameEl = input} onChange={this.updateName} placeholder="Name"  className="input-name" type="text"></input>
+            <input ref={input => this.companyEl = input} onChange={this.updateCompany} placeholder="Company" className="input-company" type="text"></input>
+            <input ref={input => this.emailEl = input} onChange={this.updateEmail} placeholder="you@place.are" className="input-email" type="email"></input>
+            <button className="contact-submit " onClick={this.submit}>Submit</button>
           </form>
           
         </div>
