@@ -8,6 +8,10 @@ module.exports = withOffline(
     /* any other next.js config goes here */
     publicRuntimeConfig: {
       BASE_API_URL: isProd ? 'http://ec2-52-23-173-160.compute-1.amazonaws.com:1337' : 'http://localhost:1337' 
+    },
+    postcssLoaderOptions: { 
+      parser: true, 
+      autoprefixer: true 
     }
   })
 )

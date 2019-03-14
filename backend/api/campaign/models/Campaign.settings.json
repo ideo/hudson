@@ -27,6 +27,10 @@
     "freeformprompts": {
       "collection": "freeformprompt",
       "via": "campaign"
+    },
+    "contacts": {
+      "collection": "contact",
+      "via": "campaign"
     }
   }
 }

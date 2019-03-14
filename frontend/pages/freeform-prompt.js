@@ -4,6 +4,7 @@ import Layout from '../components/Layout'
 import React, { Component } from 'react';
 import '../style.scss';
 import getConfig from 'next/config';
+import Link from 'next/link';
 
 const { publicRuntimeConfig } = getConfig();
 const { BASE_API_URL } = publicRuntimeConfig;
@@ -60,9 +61,9 @@ class FreeformPrompt extends Component {
   }
 
   componentWillUnMount() {
-    canvas.removeEventListener("mousedown", this.onTouchDown)
-    canvas.removeEventListener("mousemove", this.onTouchMove)
-    canvas.removeEvenmonitors("mouseup", this.onTouchUp)
+    this.canvas.removeEventListener("mousedown", this.onTouchDown)
+    this.canvas.removeEventListener("mousemove", this.onTouchMove)
+    this.canvas.removeEvenmonitors("mouseup", this.onTouchUp)
   }
 
   clearCanvas() {
@@ -280,7 +281,7 @@ class FreeformPrompt extends Component {
 
 
   render() {
-    const { notFound, data: { thankyoumessage } } = this.props
+    const { notFound, data, data: { thankyoumessage } } = this.props
     const { hasSubmitted, canvasWidth, canvasHeight } = this.state
     return (
       <Layout>
@@ -290,6 +291,9 @@ class FreeformPrompt extends Component {
           <div className="freeform-thankyou-message-container">
             <p className="freeform-thankyou-message">
               { thankyoumessage }
+
+              <br />
+              <Link href={`/contact?campaignId=${data.campaign.id}&promptId=${data.id}`}>Stay in touch?</Link>
             </p>
           </div> :
           <div className="canvas-container" id="canvas-container">

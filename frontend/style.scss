@@ -7,6 +7,9 @@ $white: #fff;
 $black: #000;
 $pastel-orange: #be8d5c;
 $light-grey: rgb(240, 240, 240);
+$orange1: rgb(196, 129, 96);
+$orange2: rgb(181, 76, 58);
+$yellow: rgb(208, 175, 98);
 
 html, body {
   font-family: 'Major Mono Display', monospace;
@@ -80,6 +83,16 @@ html, body {
   left: 50%;
   transform: translate(-50%, -50%);
   display: block;
+}
+
+.contact-container {
+  background: $orange1;
+  background-size: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
 }
 
 @media screen and (min-width: 320px) {
