@@ -1,7 +1,7 @@
 # IDEO HUDSON
 
 Hudson is a tool that helps IDEO collect user insights. Both front-end and back-end are written in JavaScript.
-The front-end uses [Next.js](https://nextjs.org/) which is a universal React framework and the backend leverages Node.js based headless CMS [Strapi](https://strapi.io)
+The front-end is a [Progressive Web App](https://medium.com/@amberleyjohanna/seriously-though-what-is-a-progressive-web-app-56130600a093) uses [Next.js](https://nextjs.org/) which is a universal React framework and the backend leverages Node.js based headless CMS [Strapi](https://strapi.io)
 
 ### Developing Frontend
 ```bash
