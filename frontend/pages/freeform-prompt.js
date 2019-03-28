@@ -23,8 +23,18 @@ class FreeformPrompt extends Component {
     isDrawing: false,
     hasSubmitted: false,
     canvasWidth: 0,
-    canvasHeight: 0
+    canvasHeight: 0,
+    longitude: 0,
+    latitude: 0
   };
+
+  geoOptions = {
+    enableHighAccuracy: true, 
+    maximumAge: 30000, 
+    timeout: 27000
+  };
+
+  wpid = null;
 
   static async getInitialProps({ query }) {
     // TODO: account for case without query ID
@@ -50,7 +60,24 @@ class FreeformPrompt extends Component {
     this.resetTempCanvas = this.resetTempCanvas.bind(this);
   }
   
+  geoSuccess = ({ coords: { latitude, longitude } }) => {
+    this.setState({ latitude, longitude })
+  }
+  
+  geoError = (e) => {
+    console.warn(`Failed to get geo location ${e}`)
+  }
+
   componentDidMount() {
+    // geolocation
+    if ("geolocation" in navigator) {
+      /* geolocation is available */
+      navigator.geolocation.watchPosition(this.geoSuccess, this.geoError, this.geoOptions);
+    } else {
+      /* geolocation IS NOT available */
+      console.warn(`geolocation tracking is not available`);
+    }
+
     this.setState({
       canvasHeight: window.innerHeight,
       canvasWidth: window.innerWidth
@@ -92,6 +119,7 @@ class FreeformPrompt extends Component {
   }
 
   saveCanvas(){
+    const { latitude: lat, longitude: lon } = this.state;
     const imageData = this.canvas.toDataURL("image/png");
     const blob = this.canvasToBlob(imageData);
     const { 
@@ -109,7 +137,7 @@ class FreeformPrompt extends Component {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        geolocation: JSON.stringify({lat: 2222, lon: 2233 }),
+        geolocation: JSON.stringify({ lat, lon }),
         freeformprompt: promptId,
         transcription: '',
         is_transcribed: false
