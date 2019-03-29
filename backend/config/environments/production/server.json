@@ -5,7 +5,7 @@
   "proxy": {
     "enabled": true,
     "ssl": true,
-    "host": "ideohudson.com/api",
+    "host": "ideohudson.com",
     "port": "1337"
   },
   "autoReload": {
@@ -16,6 +16,8 @@
   },
   "admin": {
     "autoOpen": false,
-    "backend": "/api"
+    "build": {
+      "backend": "/api"
+    }
   }
 }
