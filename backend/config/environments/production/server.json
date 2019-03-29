@@ -6,7 +6,7 @@
     "enabled": true,
     "ssl": true,
     "host": "ideohudson.com",
-    "port": "80"
+    "port": "1337"
   },
   "autoReload": {
     "enabled": false
@@ -15,6 +15,9 @@
     "enabled": false
   },
   "admin": {
-    "autoOpen": false
+    "autoOpen": false,
+    "build": {
+      "backend": "/api"
+    }
   }
 }
