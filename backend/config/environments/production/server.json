@@ -3,9 +3,7 @@
   "port": "${process.env.PORT || 1337}",
   "production": true,
   "proxy": {
-    "enabled": true,
-    "ssl": true,
-    "host": "ideohudson.com"
+    "enabled": false
   },
   "autoReload": {
     "enabled": false
