@@ -5,8 +5,7 @@
   "proxy": {
     "enabled": true,
     "ssl": true,
-    "host": "ideohudson.com",
-    "port": "1337"
+    "host": "ideohudson.com"
   },
   "autoReload": {
     "enabled": false
