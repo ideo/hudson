@@ -15,9 +15,6 @@
     "enabled": false
   },
   "admin": {
-    "autoOpen": false,
-    "build": {
-      "backend": "/api"
-    }
+    "autoOpen": false
   }
 }
