@@ -1,0 +1,36 @@
+version: "3.7"
+
+services:
+  backend:
+    image: node:10
+    ports:
+      - 1337:1337
+    volumes:
+      - ./backend:/usr/local/app
+    depends_on:
+      - db
+    restart: always
+    working_dir: /usr/local/app
+    entrypoint: "/bin/bash"
+    command: "-c \"if [ ! -d \"node_modules\" ]; then npm i; fi; npm run start\""
+    environment:
+      - DATABASE_HOST=db
+  db:
+    image: postgres
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_DB: mydb
+      POSTGRES_PASSWORD: mypassword
+      POSTGRES_USER: myuser
+  frontend:
+    image: node:10
+    ports:
+      - 80:3000
+    volumes:
+      - ./frontend:/usr/local/app
+    restart: always
+    working_dir: /usr/local/app
+    entrypoint: "/bin/bash"
+    command: "-c \"if [ ! -d \"node_modules\" ]; then npm i; fi; npm run dev\""
