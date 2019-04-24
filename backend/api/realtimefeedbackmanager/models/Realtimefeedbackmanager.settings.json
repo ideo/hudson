@@ -1,0 +1,27 @@
+{
+  "connection": "default",
+  "collectionName": "realtimefeedbackmanagers",
+  "info": {
+    "name": "realtimefeedbackmanager",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "comment": ""
+  },
+  "attributes": {
+    "campaign": {
+      "model": "campaign",
+      "via": "realtimefeedbackmanagers"
+    },
+    "feedbackprompt": {
+      "model": "feedbackprompt",
+      "via": "realtimefeedbackmanager"
+    },
+    "title": {
+      "default": "",
+      "type": "string"
+    }
+  }
+}

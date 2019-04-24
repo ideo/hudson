@@ -38,6 +38,12 @@ app.prepare()
 			app.render(req, res, actualPage, queryParams);
 		})
 
+		server.get('/realtime/:id', (req, res) => {
+			const actualPage = '/realtime-feedback';
+			const queryParams = { id: req.params.id };
+			app.render(req, res, actualPage, queryParams);
+		})
+
 		server.get(['/display/:id'], (req, res) => {
 			const actualPage = '/display';
 			const queryParams = { id: req.params.id };

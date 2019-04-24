@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/feedbackprompts",
+      "handler": "Feedbackprompt.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/feedbackprompts/count",
+      "handler": "Feedbackprompt.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/feedbackprompts/:id",
+      "handler": "Feedbackprompt.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/feedbackprompts",
+      "handler": "Feedbackprompt.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/feedbackprompts/:id",
+      "handler": "Feedbackprompt.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/feedbackprompts/:id",
+      "handler": "Feedbackprompt.destroy",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}
