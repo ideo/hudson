@@ -1,0 +1,45 @@
+{
+  "connection": "default",
+  "collectionName": "feedbackprompts",
+  "info": {
+    "name": "feedbackprompt",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "comment": ""
+  },
+  "attributes": {
+    "Prompt": {
+      "default": "",
+      "type": "text"
+    },
+    "campaign": {
+      "model": "campaign",
+      "via": "feedbackprompts"
+    },
+    "realtimefeedbackmanager": {
+      "model": "realtimefeedbackmanager",
+      "via": "feedbackprompt"
+    },
+    "feedbackentries": {
+      "collection": "feedbackentry",
+      "via": "feedbackprompt"
+    },
+    "backgroundcolor": {
+      "default": "",
+      "type": "string"
+    },
+    "textcolor": {
+      "default": "",
+      "type": "string"
+    },
+    "image": {
+      "model": "file",
+      "via": "related",
+      "plugin": "upload",
+      "required": false
+    }
+  }
+}
