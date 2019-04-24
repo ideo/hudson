@@ -1,0 +1,1 @@
+export NODE_ENV='' DATABASE_HOST='' DATABASE_PORT='' DATABASE_NAME='' DATABASE_USERNAME='' DATABASE_PASSWORD='' && pm2 start ./ecosystem.config.js --env production
