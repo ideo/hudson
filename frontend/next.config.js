@@ -7,7 +7,7 @@ module.exports = withOffline(
   withSass({
     /* any other next.js config goes here */
     publicRuntimeConfig: {
-      BASE_API_URL: isProd ? 'http://172.31.75.13:1337' : 'http://localhost:1337' 
+      BASE_API_URL: isProd ? 'http://ec2-34-225-188-146.compute-1.amazonaws.com:1337' : 'http://localhost:1337' 
     },
     postcssLoaderOptions: { 
       parser: true, 
