@@ -27,6 +27,8 @@ class RealtimeFeedback extends Component {
 
   socket = null;
   footer = null;
+  textarea = null;
+
   static async getInitialProps({ query }) {
     // TODO: account for case without query ID
     let response = {};
@@ -61,12 +63,14 @@ class RealtimeFeedback extends Component {
     this.setState({
       isFormVisible: true
     })
+    this.textarea && this.textarea.focus();
   }
 
   hideForm = () => {
     this.setState({
       isFormVisible: false
     })
+    this.textarea && this.textarea.blur();
   }
 
   handleSubmit = (e) => {
@@ -198,7 +202,11 @@ class RealtimeFeedback extends Component {
               }}
             />  
 
-            <textarea className="response-entry" onChange={this.handleChange} value={response}>
+            <textarea 
+              className="response-entry" 
+              onChange={this.handleChange} 
+              value={response}
+              ref={entryEl => (this.textarea = entryEl)}>
             </textarea>
           </form>
         }
