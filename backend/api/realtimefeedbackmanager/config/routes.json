@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/realtimefeedbackmanagers",
+      "handler": "Realtimefeedbackmanager.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/realtimefeedbackmanagers/count",
+      "handler": "Realtimefeedbackmanager.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/realtimefeedbackmanagers/:id",
+      "handler": "Realtimefeedbackmanager.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/realtimefeedbackmanagers",
+      "handler": "Realtimefeedbackmanager.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/realtimefeedbackmanagers/:id",
+      "handler": "Realtimefeedbackmanager.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/realtimefeedbackmanagers/:id",
+      "handler": "Realtimefeedbackmanager.destroy",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}
