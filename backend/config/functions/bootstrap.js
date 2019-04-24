@@ -48,7 +48,7 @@ module.exports = cb => {
     const fetchFeedbackprompt = strapi.services.feedbackprompt.fetch;
 
     client.on('subscribeToRealtimeFeedbackManager', (id) => {
-      // console.log('Client subscribed to realtimeFeedbackManagwr with id: ', id);
+      console.log('Client subscribed to realtimeFeedbackManagwr with id: ', id);
       return fetchRealtimefeedbackManager({ id })
         .then(response => {
           const serializedResponse = response.toJSON();
@@ -66,9 +66,10 @@ module.exports = cb => {
             const serializedResponse = response.toJSON()
             // console.log(serializedResponse)
             const { 
-              Prompt, id, textcolor, backgroundcolor, image: { url: imageUrl } 
+              Prompt, id, textcolor, backgroundcolor, image
             } = serializedResponse;
-            console.log('______________ prompt ID IS: ', id)
+            const imageUrl = image && image.url ? image.url : ''
+            console.log('______________ prompt ID IS: ',)
             io.emit('promptUpdate', {
               Prompt, id, textcolor, backgroundcolor, imageUrl
             })
