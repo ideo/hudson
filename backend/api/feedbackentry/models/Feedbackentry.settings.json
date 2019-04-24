@@ -1,0 +1,23 @@
+{
+  "connection": "default",
+  "collectionName": "feedbackentries",
+  "info": {
+    "name": "feedbackentry",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "comment": ""
+  },
+  "attributes": {
+    "feedbackprompt": {
+      "model": "feedbackprompt",
+      "via": "feedbackentries"
+    },
+    "response": {
+      "default": "",
+      "type": "text"
+    }
+  }
+}
