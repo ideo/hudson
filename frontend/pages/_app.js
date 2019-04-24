@@ -21,6 +21,7 @@ export default class MyApp extends App {
         <Head>
           <link href="https://fonts.googleapis.com/css?family=Major+Mono+Display" rel="stylesheet"></link>
           <link href="https://fonts.googleapis.com/css?family=Roboto:500" rel="stylesheet"></link>
+          <link href="https://fonts.googleapis.com/css?family=Domine" rel="stylesheet"></link>
           <link rel="manifest" href="/manifest.json" />
           <link rel="pwa-setup" href="/manifest.json" />
           <meta httpEquiv="X-UA-Compatible" content="IE=edge" />

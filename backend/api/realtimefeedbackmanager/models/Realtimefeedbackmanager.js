@@ -18,10 +18,13 @@ module.exports = {
     strapi.services.feedbackprompt.fetch({id: promptId}).then(response => {
       const serializedResponse = response.toJSON();
       // console.log('SERIALIZE ______ ', serializedResponse)
-      const { Prompt, id } = serializedResponse;
-      // console.log('_prompt is: _', {Prompt, id})
-      strapi.io.emit('promptUpdate', {Prompt, promptId: id})
-
+      const { 
+        Prompt, id, textcolor, backgroundcolor, image: { url: imageUrl } 
+      } = serializedResponse;
+      console.log('______________ prompt ID IS: ', id)
+      strapi.io.emit('promptUpdate', {
+        Prompt, id, textcolor, backgroundcolor, imageUrl
+      })
     })
     .catch(e => {
       console.error('failed to get realtimefeedbackManager with', 'error: ', e)

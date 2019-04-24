@@ -45,16 +45,34 @@ module.exports = cb => {
 
     // Begin realtimefeedback
     const fetchRealtimefeedbackManager = strapi.services.realtimefeedbackmanager.fetch;
+    const fetchFeedbackprompt = strapi.services.feedbackprompt.fetch;
 
     client.on('subscribeToRealtimeFeedbackManager', (id) => {
       // console.log('Client subscribed to realtimeFeedbackManagwr with id: ', id);
-      fetchRealtimefeedbackManager({ id })
+      return fetchRealtimefeedbackManager({ id })
         .then(response => {
           const serializedResponse = response.toJSON();
-          console.log(serializedResponse.feedbackprompt)
-          const { feedbackprompt: { Prompt, id: promptId } } = serializedResponse;
-          // console.log('_prompt is: _', Prompt)
-          io.emit('promptUpdate', {Prompt, promptId})
+          // console.log(JSON.stringify(serializedResponse))
+          const { 
+            feedbackprompt: {  
+              id: promptId
+            } 
+          } = serializedResponse;
+          return promptId
+        })
+        .then(promptId => {
+          return fetchFeedbackprompt(promptId)
+          .then(response => { 
+            const serializedResponse = response.toJSON()
+            // console.log(serializedResponse)
+            const { 
+              Prompt, id, textcolor, backgroundcolor, image: { url: imageUrl } 
+            } = serializedResponse;
+            console.log('______________ prompt ID IS: ', id)
+            io.emit('promptUpdate', {
+              Prompt, id, textcolor, backgroundcolor, imageUrl
+            })
+          })
         })
         .catch(e => {
           console.error('failed to get realtimefeedbackManager with id ', id, ' error: ', e)

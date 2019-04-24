@@ -2,7 +2,7 @@ require('isomorphic-fetch');
 
 import Layout from '../components/Layout'
 import React, { Component } from 'react';
-import '../style.scss';
+import '../realtime.scss';
 import getConfig from 'next/config';
 import Link from 'next/link';
 import openSocket from 'socket.io-client';
@@ -17,7 +17,10 @@ class RealtimeFeedback extends Component {
     hasSubmitted: false,
     prompt: '',
     promptId: null,
-    response: ''
+    response: '',
+    textcolor: '#000000',
+    backgroundcolor: '#ffffff',
+    imageUrl: null
   };
 
   socket = null;
@@ -71,11 +74,21 @@ class RealtimeFeedback extends Component {
     .catch(e => console.log('OH NO ', e));
   }
 
+  componentWillUnmount() {
+    this.socket && this.socket.off('promptUpdate');
+  }
+
   subscribeToRealtimeFeedbackManager(cb) {
-    this.socket.on('promptUpdate', ({Prompt: prompt, promptId}) => {
+    this.socket.on('promptUpdate', ({
+      Prompt: prompt, id: promptId, textcolor, backgroundcolor, imageUrl
+    }) => {
+      // console.log('_____ promptId', promptId)
       this.setState({
         prompt,
-        promptId
+        promptId,
+        textcolor,
+        backgroundcolor,
+        imageUrl: `${BASE_API_URL}${imageUrl}`
       });
     });
     this.socket.emit('subscribeToRealtimeFeedbackManager', this.props.id); 
@@ -83,17 +96,37 @@ class RealtimeFeedback extends Component {
 
   render() {
     const { notFound } = this.props;
-    const { prompt, promptId, response } = this.state;
+    const { prompt, promptId, response, backgroundcolor, textcolor } = this.state;
     return (
       <Layout>
         {notFound && <h1>Oops. Realtime feedback manager not found.</h1>}
-        <h1>{prompt}</h1>
-        <h3>{promptId}</h3>
-        <form onSubmit={this.handleSubmit}>
+        <div className="container" style={{
+          backgroundColor: backgroundcolor,
+          color: textcolor
+        }}>
+        <div 
+          className="card"
+          style={{
+            backgroundColor: backgroundcolor,
+            color: textcolor
+
+          }}>
+          <footer 
+            className="footer"
+            style={{
+              backgroundColor: textcolor,
+              color: backgroundcolor
+            }}>
+            <h1 className="prompt">{prompt}</h1>
+          </footer>
+        </div>
+        <form className="response-form" onSubmit={this.handleSubmit}>
           <textarea onChange={this.handleChange} value={response}>
           </textarea>
           <input type="submit" onClick={this.handleSubmit} />
         </form>
+        </div>
+        
       </Layout>
     );
   }
