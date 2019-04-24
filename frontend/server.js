@@ -52,7 +52,8 @@ app.prepare()
 
 		// temp.
 		server.get(['/index.html'], (req, res) => {
-			res.redirect('/freeform/1')
+			// res.redirect('/freeform/1')
+			res.redirect('/realtime/1')
 		})
 
 		server.get('*', (req, res) => {

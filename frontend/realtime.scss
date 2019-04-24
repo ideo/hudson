@@ -62,9 +62,19 @@ html, body {
 
   }
 
+  .response-cancel {
+    font-family: 'Rajdhani', sans-serif;
+    width: 30%;
+    height: 2em;
+    font-size: 2em;
+    text-align: center;
+    line-height: 1.5;
+    border-width: 1px;
+    border-style: solid;
+  }
   .response-submit {
     font-family: 'Rajdhani', sans-serif;
-    width: 100%;
+    width: 70%;
     height: 2em;
     font-size: 2em;
     text-align: center;

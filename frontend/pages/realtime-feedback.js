@@ -139,9 +139,11 @@ class RealtimeFeedback extends Component {
           backgroundColor: backgroundcolor,
           color: textcolor
         }}>
-        <div className="logo">
-          <img alt="IDEO" src="../static/ideo-logo.png" />
-        </div>
+        { !isFormVisible && 
+          <div className="logo">
+            <img alt="IDEO" src="../static/ideo-logo.png" />
+          </div>
+        }
         <div 
           className="card"
           style={{
@@ -173,6 +175,7 @@ class RealtimeFeedback extends Component {
         { isFormVisible &&    
           <form className="response-form" onSubmit={this.handleSubmit}>
             <input 
+              value="Submit"
               className="response-submit" 
               type="submit" 
               onClick={this.handleSubmit} 
@@ -182,6 +185,18 @@ class RealtimeFeedback extends Component {
                 borderColor: textcolor
               }}
             />
+
+            <input 
+              className="response-cancel" 
+              type="submit" 
+              value="Cancel"
+              onClick={this.hideForm} 
+              style={{
+                color: textcolor,
+                backgroundColor: backgroundcolor,
+                borderColor: textcolor
+              }}
+            />  
 
             <textarea className="response-entry" onChange={this.handleChange} value={response}>
             </textarea>
