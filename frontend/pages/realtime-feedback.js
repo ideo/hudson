@@ -150,7 +150,7 @@ class RealtimeFeedback extends Component {
             backgroundColor: backgroundcolor,
             color: textcolor
           }}
-          onTouchStart={this.showForm}>
+          onClick={this.showForm}>
           <div className="pulsating-circle"></div>
 
           <header 
