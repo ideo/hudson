@@ -10,13 +10,14 @@ import openSocket from 'socket.io-client';
 
 const { publicRuntimeConfig } = getConfig();
 const { BASE_API_URL } = publicRuntimeConfig;
-
+const FEEDBACK_ENTRY_API_URL = `${BASE_API_URL}/feedbackentries`
 
 class RealtimeFeedback extends Component {
   state = {
     hasSubmitted: false,
     prompt: '',
-    promptId: null
+    promptId: null,
+    response: ''
   };
 
   socket = null;
@@ -44,12 +45,30 @@ class RealtimeFeedback extends Component {
     this.subscribeToRealtimeFeedbackManager()
   }
 
-  componentDidMount() {
-    
+
+  handleChange = (e) => {
+    const value = e.target.value;
+    this.setState({ response: value})
   }
 
-  componentWillUnMount() {
-    
+  handleSubmit = (e) => {
+    e.preventDefault();
+    const { response, promptId: feedbackprompt } = this.state;
+    fetch(FEEDBACK_ENTRY_API_URL, {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        response,
+        feedbackprompt
+      })
+    }).then(res => res.json())
+    .then(res => {
+      console.log('woohooo ', res);
+      this.setState({ response: ''})
+    })
+    .catch(e => console.log('OH NO ', e));
   }
 
   subscribeToRealtimeFeedbackManager(cb) {
@@ -64,12 +83,17 @@ class RealtimeFeedback extends Component {
 
   render() {
     const { notFound } = this.props;
-    const { prompt, promptId } = this.state;
+    const { prompt, promptId, response } = this.state;
     return (
       <Layout>
         {notFound && <h1>Oops. Realtime feedback manager not found.</h1>}
         <h1>{prompt}</h1>
         <h3>{promptId}</h3>
+        <form onSubmit={this.handleSubmit}>
+          <textarea onChange={this.handleChange} value={response}>
+          </textarea>
+          <input type="submit" onClick={this.handleSubmit} />
+        </form>
       </Layout>
     );
   }
