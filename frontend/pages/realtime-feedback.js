@@ -62,15 +62,17 @@ class RealtimeFeedback extends Component {
   showForm = () => {
     this.setState({
       isFormVisible: true
+    }, () => {
+      this.textarea && this.textarea.focus();
     })
-    this.textarea && this.textarea.focus();
   }
 
   hideForm = () => {
     this.setState({
       isFormVisible: false
+    }, () => {
+      this.textarea && this.textarea.blur();
     })
-    this.textarea && this.textarea.blur();
   }
 
   handleSubmit = (e) => {
