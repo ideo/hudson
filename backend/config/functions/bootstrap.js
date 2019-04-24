@@ -51,7 +51,7 @@ module.exports = cb => {
       fetchRealtimefeedbackManager({ id })
         .then(response => {
           const serializedResponse = response.toJSON();
-          // console.log(serializedResponse.feedbackprompt)
+          console.log(serializedResponse.feedbackprompt)
           const { feedbackprompt: { Prompt, id: promptId } } = serializedResponse;
           // console.log('_prompt is: _', Prompt)
           io.emit('promptUpdate', {Prompt, promptId})
