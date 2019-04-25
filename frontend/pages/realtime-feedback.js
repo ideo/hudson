@@ -145,11 +145,7 @@ class RealtimeFeedback extends Component {
           backgroundColor: backgroundcolor,
           color: textcolor
         }}>
-        { !isFormVisible && 
-          <div className="logo">
-            <img alt="IDEO" src="../static/ideo-logo.png" />
-          </div>
-        }
+        
         <div 
           className="card"
           style={{
@@ -221,9 +217,7 @@ class RealtimeFeedback extends Component {
               backgroundColor: backgroundcolor,
               borderColor: textcolor
             }}>
-            <div className="logo">
-              <img alt="IDEO" src="../static/ideo-logo.png" />
-            </div>
+            
             <p>
               Thanks you! <br /> Your feedback is much appreciated.
             </p>
