@@ -8,7 +8,7 @@
     "@zeit/next-sass": "^1.0.1",
     "css-reset-and-normalize": "^2.0.1",
     "express": "^4.16.4",
-    "gsap": "^2.1.2",
+    "gsap": "^3.6.0",
     "isomorphic-fetch": "^2.2.1",
     "next": "^8.0.3",
     "next-offline": "^3.3.6",
