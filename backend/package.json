@@ -23,7 +23,7 @@
     "lodash": "^4.17.11",
     "pg": "^7.8.1",
     "socket.io": "^2.2.0",
-    "strapi": "3.0.0-alpha.24.1",
+    "strapi": "3.6.8",
     "strapi-hook-bookshelf": "3.0.0-alpha.24.1",
     "strapi-hook-knex": "3.0.0-alpha.24.1",
     "uuid": "^3.3.2"
